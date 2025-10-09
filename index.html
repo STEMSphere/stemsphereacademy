@@ -242,9 +242,64 @@ h2 {
   </div>
 </header>
 
+<!-- START: COMPACT LANGUAGE TRANSLATOR BAR (TOP-RIGHT, ORIGINAL SIZE) -->
+<style>
+  #fallback-translator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #eef2f5;
+    padding: 6px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+  }
+  #fallback-translator select {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+</style>
+
+<div id="fallback-translator">
+  <select onchange="translatePage(this.value)">
+    <option value="en" selected>🌐 English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+    <option value="zh-CN">简体中文</option>
+    <option value="zh-TW">繁體中文</option>
+    <option value="ja">日本語</option>
+    <option value="ko">한국어</option>
+    <option value="ar">العربية</option>
+    <option value="hi">हिन्दी</option>
+    <option value="pt">Português</option>
+    <option value="ru">Русский</option>
+    <option value="it">Italiano</option>
+    <option value="nl">Nederlands</option>
+    <option value="pl">Polski</option>
+    <option value="tr">Türkçe</option>
+    <option value="vi">Tiếng Việt</option>
+    <option value="th">ไทย</option>
+    <option value="id">Bahasa Indonesia</option>
+    <option value="ms">Bahasa Melayu</option>
+  </select>
+</div>
+
+<script>
+  function translatePage(lang) {
+    if (!lang || lang === 'en') return;
+    const loc = encodeURIComponent(window.location.href);
+    window.location.href =
+      'https://translate.google.com/translate?sl=en&tl='
+      + lang + '&u=' + loc;
+  }
+</script>
+<!-- END: COMPACT LANGUAGE TRANSLATOR BAR -->
+
 <!-- ✅ LOGIN LINK (BELOW TRANSLATOR) -->
 <a href="https://learn.stemsphere.academy/login.html" class="login-link">
-  🔓 Login/Signup
+  🔓 Student Login/Signup
 </a>
 
 <!-- Banner Video -->
@@ -304,7 +359,7 @@ h2 {
         !textVal.includes("facebook")
       );
     })
-    .sort((a, b) => new Date(b[3]) - new Date(a[3]));
+        .sort((a, b) => new Date(b[3]) - new Date(a[3]));
 
   if (!reviews.length) return;
 
@@ -693,8 +748,7 @@ h2 {
     box-sizing: border-box;
   }
 
-  #why-choose ul li {
-    position: relative;
+      position: relative;
     padding-left: 1.5em;      /* space for the custom bullet */
     margin-bottom: 1rem;
     color: #ddd;
@@ -929,146 +983,6 @@ h2 {
 
 <!-- END: Pricing & Membership Section -->
 
-<!-- START:FULL-LANGUAGE TRANSLATOR BAR (TOP-RIGHT) -->
-<style>
-  #fallback-translator {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: #eef2f5;
-    padding: 6px 8px;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    z-index: 9999;
-    font-family: Arial, sans-serif;
-  }
-  #fallback-translator select {
-    font-size: 14px;
-    padding: 4px 6px;
-  }
-</style>
-
-<div id="fallback-translator">
-  <select onchange="translatePage(this.value)">
-    <option value="en" selected>🌐 English</option>
-    <option value="af">Afrikaans</option>
-    <option value="sq">Albanian – Shq‎ip</option>
-    <option value="am">Amharic – አማርኛ</option>
-    <option value="ar">Arabic – العربية</option>
-    <option value="hy">Armenian – Հայերեն</option>
-    <option value="az">Azerbaijani – Azərbaycan</option>
-    <option value="eu">Basque – Euskara</option>
-    <option value="be">Belarusian – Беларуская</option>
-    <option value="bn">Bengali – বাংলা</option>
-    <option value="bs">Bosnian – Bosanski</option>
-    <option value="bg">Bulgarian – Български</option>
-    <option value="ca">Catalan – Català</option>
-    <option value="ceb">Cebuano</option>
-    <option value="ny">Chichewa – Chichewa</option>
-    <option value="zh-CN">Chinese (Simplified) – 简体中文</option>
-    <option value="zh-TW">Chinese (Traditional) – 繁體中文</option>
-    <option value="co">Corsican – Corsu</option>
-    <option value="hr">Croatian – Hrvatski</option>
-    <option value="cs">Czech – Čeština</option>
-    <option value="da">Danish – Dansk</option>
-    <option value="nl">Dutch – Nederlands</option>
-    <option value="eo">Esperanto</option>
-    <option value="et">Estonian – Eesti</option>
-    <option value="tl">Filipino – Tagalog</option>
-    <option value="fi">Finnish – Suomi</option>
-    <option value="fr">French – Français</option>
-    <option value="fy">Frisian – Frysk</option>
-    <option value="gl">Galician – Galego</option>
-    <option value="ka">Georgian – ქართული</option>
-    <option value="de">German – Deutsch</option>
-    <option value="el">Greek – Ελληνικά</option>
-    <option value="gu">Gujarati – ગુજરાતી</option>
-    <option value="ht">Haitian Creole – Kreyòl</option>
-    <option value="ha">Hausa – Hausa</option>
-    <option value="haw">Hawaiian – ʻŌlelo Hawaiʻi</option>
-    <option value="iw">Hebrew – עברית</option>
-    <option value="hi">Hindi – हिन्दी</option>
-    <option value="hmn">Hmong</option>
-    <option value="hu">Hungarian – Magyar</option>
-    <option value="is">Icelandic – Íslenska</option>
-    <option value="ig">Igbo – Igbo</option>
-    <option value="id">Indonesian – Bahasa Indonesia</option>
-    <option value="ga">Irish – Gaeilge</option>
-    <option value="it">Italian – Italiano</option>
-    <option value="ja">Japanese – 日本語</option>
-    <option value="jw">Javanese – Basa Jawa</option>
-    <option value="kn">Kannada – ಕನ್ನಡ</option>
-    <option value="kk">Kazakh – Қазақ</option>
-    <option value="km">Khmer – ខ្មែរ</option>
-    <option value="ko">Korean – 한국어</option>
-    <option value="ku">Kurdish (Kurmanji) – Kurdî</option>
-    <option value="ky">Kyrgyz – Кыргызча</option>
-    <option value="lo">Lao – ລາວ</option>
-    <option value="la">Latin – Latīna</option>
-    <option value="lv">Latvian – Latviešu</option>
-    <option value="lt">Lithuanian – Lietuvių</option>
-    <option value="lb">Luxembourgish – Lëtzebuergesch</option>
-    <option value="mk">Macedonian – Македонски</option>
-    <option value="mg">Malagasy – Malagasy</option>
-    <option value="ms">Malay – Bahasa Melayu</option>
-    <option value="ml">Malayalam – മലയാളം</option>
-    <option value="mt">Maltese – Malti</option>
-    <option value="mi">Maori – Te Reo Māori</option>
-    <option value="mr">Marathi – मराठी</option>
-    <option value="mn">Mongolian – Монгол</option>
-    <option value="my">Myanmar (Burmese) – မြန်မာ</option>
-    <option value="ne">Nepali – नेपाली</option>
-    <option value="no">Norwegian – Norsk</option>
-    <option value="ps">Pashto – پښتو</option>
-    <option value="fa">Persian – فارسی</option>
-    <option value="pl">Polish – Polski</option>
-    <option value="pt">Portuguese – Português</option>
-    <option value="pa">Punjabi – ਪੰਜਾਬੀ</option>
-    <option value="ro">Romanian – Română</option>
-    <option value="ru">Russian – Русский</option>
-    <option value="sm">Samoan – Gagana Samoa</option>
-    <option value="gd">Scots Gaelic – Gàidhlig</option>
-    <option value="sr">Serbian – Српски</option>
-    <option value="st">Sesotho – Sesotho</option>
-    <option value="sn">Shona – chiShona</option>
-    <option value="sd">Sindhi – سنڌي</option>
-    <option value="si">Sinhala – සිංහල</option>
-    <option value="sk">Slovak – Slovenčina</option>
-    <option value="sl">Slovenian – Slovenščina</option>
-    <option value="so">Somali – Soomaali</option>
-    <option value="es">Spanish – Español</option>
-    <option value="su">Sundanese – Basa Sunda</option>
-    <option value="sw">Swahili – Kiswahili</option>
-    <option value="sv">Swedish – Svenska</option>
-    <option value="tg">Tajik – Тоҷикӣ</option>
-    <option value="ta">Tamil – தமிழ்</option>
-    <option value="te">Telugu – తెలుగు</option>
-    <option value="th">Thai – ไทย</option>
-    <option value="tr">Turkish – Türkçe</option>
-    <option value="uk">Ukrainian – Українська</option>
-    <option value="ur">Urdu – اردو</option>
-    <option value="uz">Uzbek – Oʻzbek</option>
-    <option value="vi">Vietnamese – Tiếng Việt</option>
-    <option value="cy">Welsh – Cymraeg</option>
-    <option value="xh">Xhosa – isiXhosa</option>
-    <option value="yi">Yiddish – ייִדיש</option>
-    <option value="yo">Yoruba – Èdè Yorùbá</option>
-    <option value="zu">Zulu – isiZulu</option>
-  </select>
-</div>
-
-<script>
-  function translatePage(lang) {
-    if (!lang) return;
-    const loc = encodeURIComponent(window.location.href);
-    window.location.href =
-      'https://translate.google.com/translate?sl=en&tl='
-      + lang + '&u=' + loc;
-  }
-</script>
-
-<!-- END FULL-LANGUAGE TRANSLATOR BAR (TOP-RIGHT) -->
-
 <!-- ─── Blog Section ────────────────────────────────────────── -->
 <section id="blog">
 
@@ -1236,7 +1150,7 @@ h2 {
     <p> Its not a free trial but more of a free diagnostics. We offer a free diagnostics/ mini session with one of our enrollments specilaist. The goal of our enrollments sepcialist is to match you with a tutor that fits your learning style. Click the "Book Your Free Trial" button above or reach out to us via email. We'll schedule your session within 24 hours and match you with the perfect tutor.</p>
   </details>
 
-  <details>
+   <details>
     <summary>What subjects and levels do you cover?</summary>
     <p>We offer personalized tutoring in Math, Chemistry, Biology, Coding, English, Public Speaking, SAT/ACT prep, and more—from elementary through adult learners.</p>
   </details>
