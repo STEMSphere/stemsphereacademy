@@ -19,7 +19,7 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="https://learn.stemsphere.academy">
 
-<!-- Favicon ( favconsp1.2.png in /assets/) -->
+<!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="https://learn.stemsphere.academy/assets/favconsp1.2.png">
 
   <!-- Structured Data (Schema) -->
@@ -60,7 +60,6 @@
   <img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=571053619377842&ev=PageView&noscript=1"/>
 </noscript>
-<!-- End Meta Pixel Code -->
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17612604770"></script>
@@ -68,199 +67,737 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'AW-17612604770');
 </script>
-<!-- End google tag -->
   
-  <!-- Section: External Stylesheet -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
 
   <style>
-  /* ─── Base Styles ───────────────────────────────────────────── */
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-  }
-
-/* ─── Header Container ──────────────────────────────────────── */
-header {
-  position: relative;
-  padding: 3em 1em 1em;
-  text-align: center;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 BASE STYLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ─── Brand Logo ───────────────────────────────────────────── */
+body {
+  font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🔝 HEADER & NAVIGATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+header {
+  position: relative;
+  padding: 2rem 1rem 1rem;
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
 .brand {
   position: absolute;
   top: 1rem;
   left: 1rem;
   display: flex;
   align-items: center;
-}
-.brand-logo {
-  width: 1.8em;
-  height: 1.8em;
-  line-height: 1.8em;
-  background-color: #ff0000;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.1em;
-  text-align: center;
-  border-radius: 4px;
-  margin-right: 0.5em;
-}
-.brand-text {
-  color: #fff;
-  font-size: 1.2em;
-  font-weight: 700;
+  gap: 0.5rem;
+  z-index: 100;
 }
 
-/* ─── LOGIN LINK (TOP-RIGHT, BELOW TRANSLATOR) ──────────────── */
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  background: #ff0000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(255,0,0,0.4);
+}
+
+.brand-text {
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Language Translator */
+#fallback-translator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.95);
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+}
+
+#fallback-translator select {
+  font-size: 14px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Login Link */
 .login-link {
   position: fixed;
-  top: 50px;
+  top: 55px;
   right: 10px;
   z-index: 9998;
-  background: #007bff;
+  background: linear-gradient(135deg, #007bff, #0056b3);
   color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95em;
-  box-shadow: 0 2px 6px rgba(0,123,255,0.4);
+  box-shadow: 0 4px 12px rgba(0,123,255,0.4);
   transition: all 0.3s;
 }
+
 .login-link:hover {
-  background: #0056b3;
-  box-shadow: 0 4px 12px rgba(0,123,255,0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,123,255,0.6);
 }
 
-/* ─── Title Group ─────────────────────────────────────────── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎬 HERO SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .title-group {
-  display: block;
-  margin-top: 5em;
+  margin-top: 4rem;
+  animation: fadeInUp 0.8s ease-out;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .title-group span {
   display: block;
-  font-size: 2em;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -1px;
   margin: 0.2em 0;
-}
-.title-group span:first-child { color: #fff; }
-.title-group span:last-child  { color: #ff0000; }
-
-@media (min-width: 992px) {
-  .title-group span {
-    font-size: 3em;
-  }
+  text-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* ─── Subtitle ────────────────────────────────────────────── */
-h2 {
-  font-size: clamp(0.8em, 4.5vw, 1.4em);
-  white-space: nowrap;
-  color: #ccc;
-  margin-top: 0.2em;
+.title-group span:first-child {
+  background: linear-gradient(135deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ✅ Mobile tweak: make subtitle a tad smaller */
-@media (max-width: 600px) {
-  h2 {
-    font-size: 0.9em; /* slightly smaller on mobile */
-  }
+.title-group span:last-child {
+  background: linear-gradient(135deg, #ff0000, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ─── Course Bar ───────────────────────────────────────────── */
+h2.subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  color: rgba(255,255,255,0.9);
+  margin: 1rem auto;
+  max-width: 800px;
+  font-weight: 400;
+}
+
+/* Course Bar */
 .course-bar {
-  display: inline-flex; /* inline so it hugs content */
-  flex-wrap: nowrap;
+  display: inline-flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 0.5em 1.2em;
-  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
   background: linear-gradient(90deg, #00f8ff, #ff00d0);
   font-weight: 700;
-  font-size: 1.1em;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   color: #fff;
-  margin-top: 0.8em;
-  white-space: nowrap;
+  margin: 1.5rem auto;
+  box-shadow: 0 8px 20px rgba(0,248,255,0.3);
+  animation: pulse 2s infinite;
 }
-.course-bar span + span { margin-left: 0.5em; }
 
-/* ─── Banner Video ────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 8px 20px rgba(0,248,255,0.3);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(255,0,208,0.5);
+  }
+}
+
+.course-bar span + span {
+  margin-left: 0.5em;
+}
+
+/* Banner Video */
 .banner-video {
   width: 100%;
-  max-width: 850px;
-  margin: 2em auto;
-  border-radius: 12px;
+  max-width: 900px;
+  margin: 3rem auto;
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
+
 .banner-video video {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 12px;
 }
 
-/* ─── Statistic Message ───────────────────────────────────── */
-.stat-message {
-  font-size: 1em; /* smaller */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🚀 CTA BUTTON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#highIntentCTA {
+  position: relative;
+  text-align: center;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+#highIntentCTA a {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff0000, #ff6b6b);
+  color: #fff;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 800;
+  padding: 1.2rem 2.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+#highIntentCTA a:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255,0,0,0.7);
+}
+
+#highIntentCTA::before {
+  content: "⬇⬇⬇";
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 0 0 10px #00c6ff;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ⭐ REVIEWS SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#reviews-container {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 900px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+#reviews-container h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #FFD700;
+}
+
+#reviews-body {
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📚 SUBJECTS SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#tutoring-subjects {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 4rem 1rem;
+  position: relative;
+}
+
+#tutoring-subjects h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #fff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#tutoring-subjects p.intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.tutoring-banner {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.tutor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.tutor-subject {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.tutor-subject::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tutor-subject:hover {
+  transform: translateY(-10px);
+  border-color: #ff0000;
+  box-shadow: 0 20px 40px rgba(255,0,0,0.3);
+}
+
+.tutor-subject:hover::before {
+  opacity: 1;
+}
+
+.tutor-subject img {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.tutor-subject h4 {
+  color: #ff0000;
+  font-size: 1.3em;
+  margin: 1rem 0 0.5rem;
   font-weight: 700;
-  color: tomato; /* softer red */
-  text-shadow: none; /* no glow */
-  line-height: 1.4em;
-  margin: 1em 0;
-  padding: 0 1em;
+}
+
+.tutor-desc {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   💰 PRICING SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#pricing-section {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  padding: 4rem 1rem;
+}
+
+#pricing-section .content-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,215,0,0.3);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+}
+
+#pricing-section h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#pricing-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 700px;
+}
+
+#pricing-section ul li {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+  transition: all 0.3s;
+}
+
+#pricing-section ul li:hover {
+  transform: translateX(10px);
+  border-color: #FFD700;
+  box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+}
+
+#pricing-section ul li.most-popular {
+  border: 3px solid #FFD700;
+  background: rgba(255,215,0,0.1);
+  box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+}
+
+#pricing-section ul li.most-popular .badge {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.85em;
+  padding: 5px 15px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(255,215,0,0.5);
+}
+
+#pricing-section .highlight {
+  color: #FFD700;
+  font-weight: 700;
+}
+
+#pricing-section .conversion-box {
+  margin: 3rem auto 0;
+  padding: 2rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  max-width: 600px;
+}
+
+#oanda_ecc {
+  width: 100%;
+}
+
+#oanda_ecc span {
+  color: #fff;
+  font-size: 0.9em;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎯 WHY CHOOSE US SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#why-choose {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 4rem 1rem;
+}
+
+#why-choose h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+#why-choose .highlight {
+  color: #ff0000;
+  font-weight: 700;
+}
+
+#why-choose p {
+  max-width: 800px;
+  margin: 1.5rem auto;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
   text-align: center;
 }
-</style>
 
-<!-- Page Header -->
-<header>
-  <div class="brand">
-    <span class="brand-logo">SP</span>
-    <span class="brand-text">STEMSphere</span>
-  </div>
+#why-choose ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 800px;
+}
 
-  <div class="title-group">
-    <span>Other Courses Teach.</span>
-    <span>We Transform!</span>
-  </div>
+#why-choose ul li {
+  position: relative;
+  padding-left: 2.5em;
+  margin: 1rem 0;
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
 
-  <h2>Kids → High School → College & Adult Learners!</h2>
+#why-choose ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ff88;
+  font-size: 1.5em;
+  font-weight: 700;
+}
 
-  <div class="course-bar">
-    <span>MATH</span><span>|</span><span>Chemistry</span>
-    <span>|</span><span>Biology</span><span>|</span>
-    <span>Coding & more</span>
-  </div>
-</header>
+#why-choose .stat {
+  text-align: center;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255,0,0,0.1);
+  border-left: 5px solid #ff0000;
+  border-radius: 8px;
+  max-width: 700px;
+}
 
-<!-- START: COMPACT LANGUAGE TRANSLATOR BAR (TOP-RIGHT, ORIGINAL SIZE) -->
-<style>
-  #fallback-translator {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: #eef2f5;
-    padding: 6px 8px;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    z-index: 9999;
-    font-family: Arial, sans-serif;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📝 BLOG SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#blog {
+  background: #fff;
+  padding: 4rem 2rem;
+}
+
+.blog-post {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.blog-title {
+  color: #ff0000 !important;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.blog-subtitle {
+  color: #333;
+  font-size: 1.5em;
+  margin: 2rem 0 1rem;
+  font-weight: 700;
+}
+
+.blog-body {
+  color: #333;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin: 1rem 0;
+}
+
+.blog-body strong {
+  color: #ff0000;
+  font-weight: 600;
+}
+
+.blog-topics {
+  list-style: disc;
+  padding-left: 2em;
+  color: #333;
+  margin: 1rem 0;
+}
+
+.blog-topics li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ❓ FAQ SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#faq-contact {
+  background: linear-gradient(135deg, #0f0c29, #302b63);
+  padding: 4rem 1rem;
+}
+
+#faq-contact h3 {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+#faq-contact details {
+  margin: 1.5rem auto;
+  max-width: 800px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+#faq-contact details:hover {
+  border-color: #00c6ff;
+  box-shadow: 0 10px 30px rgba(0,198,255,0.3);
+}
+
+#faq-contact summary {
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #00dffc;
+  outline: none;
+  list-style: none;
+  position: relative;
+  padding-right: 2rem;
+}
+
+#faq-contact summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.5em;
+  color: #00dffc;
+  transition: transform 0.3s;
+}
+
+#faq-contact details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+#faq-contact details p {
+  margin: 1rem 0 0;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  font-size: 1.05rem;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🦶 FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer {
+  background: #000;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.95em;
+}
+
+.footer-links {
+  margin: 1rem 0;
+}
+
+.footer-links a,
+.footer-contact a {
+  color: #00dffc;
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📱 MOBILE RESPONSIVENESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 768px) {
+  .brand {
+    position: static;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
-  #fallback-translator select {
-    font-size: 14px;
-    padding: 4px 6px;
-  }
-</style>
 
+  .title-group {
+    margin-top: 2rem;
+  }
+
+  #highIntentCTA::before {
+    top: -40px;
+    font-size: 1.5rem;
+  }
+
+  .tutor-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #pricing-section .content-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .blog-post {
+    padding: 1.5rem;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- START: COMPACT LANGUAGE TRANSLATOR BAR -->
 <div id="fallback-translator">
   <select onchange="translatePage(this.value)">
     <option value="en" selected>🌐 English</option>
@@ -295,14 +832,34 @@ h2 {
       + lang + '&u=' + loc;
   }
 </script>
-<!-- END: COMPACT LANGUAGE TRANSLATOR BAR -->
 
-<!-- ✅ LOGIN LINK (BELOW TRANSLATOR) -->
+<!-- LOGIN LINK -->
 <a href="https://learn.stemsphere.academy/login.html" class="login-link">
   🔓 Student Login/Signup
 </a>
 
-<!-- Banner Video -->
+<!-- HEADER -->
+<header>
+  <div class="brand">
+    <span class="brand-logo">SP</span>
+    <span class="brand-text">STEMSphere</span>
+  </div>
+
+  <div class="title-group">
+    <span>Other Courses Teach.</span>
+    <span>We Transform!</span>
+  </div>
+
+  <h2 class="subtitle">Kids → High School → College & Adult Learners!</h2>
+
+  <div class="course-bar">
+    <span>MATH</span><span>|</span><span>Chemistry</span>
+    <span>|</span><span>Biology</span><span>|</span>
+    <span>Coding & more</span>
+  </div>
+</header>
+
+<!-- BANNER VIDEO -->
 <div class="banner-video">
   <video autoplay muted loop playsinline>
     <source src="https://learn.stemsphere.academy/assets/StemspherebannerVid29S3pt.mp4" type="video/mp4">
@@ -310,32 +867,14 @@ h2 {
   </video>
 </div>
 
-<!-- 🌟 BEGIN: Direct Student Login Link -->
-
-<div id="highIntentCTA" style="position:relative; text-align:center; margin:40px;">
-  <a href="https://learn.stemsphere.academy/login.html"
-    style="display:inline-block; background:linear-gradient(90deg,#007bff,#00c6ff); color:#fff; font-size:20px; font-weight:bold; padding:15px 30px; border:none; border-radius:8px; cursor:pointer; box-shadow:0 0 15px rgba(0,123,255,0.7); animation:pulse 1.5s infinite; text-decoration:none;">
+<!-- CTA BUTTON -->
+<div id="highIntentCTA">
+  <a href="https://learn.stemsphere.academy/login.html">
     🚀 Book Your Enrollment Session Now
   </a>
-  <div style="position:absolute; top:-45px; left:50%; transform:translateX(-50%); font-size:26px; color:#fff; text-shadow:0 0 6px #00c6ff; animation:bounce 1.8s infinite;">⬇⬇⬇</div>
 </div>
 
-<style>
-  @keyframes pulse {
-    0% { box-shadow:0 0 10px rgba(0,123,255,0.7); }
-    50% { box-shadow:0 0 25px rgba(0,198,255,1); }
-    100% { box-shadow:0 0 10px rgba(0,123,255,0.7); }
-  }
-  @keyframes bounce {
-    0%,100% { transform:translate(-50%,0); }
-    50% { transform:translate(-50%,8px); }
-  }
-</style>
-
-<!-- 🌟 END: Direct Student Login Link -->
-
-
-<!-- Reviews Dropdown Script -->
+<!-- REVIEWS SECTION -->
 <div id="reviews-container"></div>
 <script>
 (async () => {
@@ -348,7 +887,6 @@ h2 {
     r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, ''))
   );
 
-  // ✅ Filter out junk rows
   const reviews = rows
     .filter(r => {
       const name = (r[0] || "").toLowerCase();
@@ -359,7 +897,7 @@ h2 {
         !textVal.includes("facebook")
       );
     })
-        .sort((a, b) => new Date(b[3]) - new Date(a[3]));
+    .sort((a, b) => new Date(b[3]) - new Date(a[3]));
 
   if (!reviews.length) return;
 
@@ -382,7 +920,7 @@ h2 {
         See all reviews
       </button>
       <button id="submit-review" style="background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em;">
-                Submit a review
+        Submit a review
       </button>
     </div>
     <div id="reviews-body" style="margin-top:1.2em; display:none; text-align:left;"></div>
@@ -393,8 +931,7 @@ h2 {
   let currentIndex = 0;
   const batchSize = 20;
 
-  // Persistent button
-  const seeMoreBtn = document.createElement('button');
+    const seeMoreBtn = document.createElement('button');
   seeMoreBtn.textContent = 'See more reviews';
   seeMoreBtn.style.cssText = "background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em; margin-top:1em; display:block;";
   seeMoreBtn.addEventListener('click', renderNextBatch);
@@ -422,7 +959,6 @@ h2 {
     });
     currentIndex += batchSize;
 
-    // ✅ Always move button to bottom
     if (currentIndex < reviews.length) {
       if (reviewsBody.contains(seeMoreBtn)) {
         reviewsBody.removeChild(seeMoreBtn);
@@ -433,7 +969,6 @@ h2 {
     }
   }
 
-  // Toggle reviews
   wrapper.querySelector('#toggle-reviews').addEventListener('click', e => {
     const show = reviewsBody.style.display === 'block';
     reviewsBody.style.display = show ? 'none' : 'block';
@@ -443,146 +978,11 @@ h2 {
     }
   });
 
-  // Submit review
   wrapper.querySelector('#submit-review').addEventListener('click', ()=> window.open(formUrl, '_blank'));
 })();
 </script>
-<!-- End Reviews Dropdown Script -->
 
-
-<!-- BEGIN: Courses & Tutoring Styles -->
-<style>
-  /* 0) Kill any horizontal scroll */
-  html, body {
-    overflow-x: hidden;
-  }
-
-  .courses-tutoring {
-    font-family: Arial, sans-serif;
-  }
-
-  /* 1) Section titles white, wrap on mobile */
-  .courses-tutoring h2 {
-    color: #ffffff;
-    font-size: 2em;
-    text-align: center;
-    margin-top: 2rem;
-    white-space: normal;
-  }
-
-  /* 2) Intro paragraphs – free-wrap on narrow, no-break on desktop */
-  .courses-tutoring p.intro {
-    color: #ddd;
-    text-align: center;
-    max-width: 800px;
-    margin: 0.5rem auto 2rem;
-  }
-  @media (min-width: 768px) {
-    .courses-tutoring p.intro {
-      white-space: nowrap;
-    }
-  }
-
-  /* 3) Grids never overflow container */
-  .courses-tutoring .tutor-grid,
-  .courses-tutoring .course-grid {
-    display: grid;
-    grid-gap: 1rem;
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-    padding: 0 1rem;
-    box-sizing: border-box;
-  }
-
-  .courses-tutoring .tutor-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
-  .courses-tutoring .tutor-subject,
-  .courses-tutoring .course-tile {
-    background: #111;
-    border: 2px solid #ff0000;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  /* 4) Responsive images */
-  .courses-tutoring .tutor-subject img,
-  .courses-tutoring .course-tile img,
-  .courses-tutoring .tutoring-banner {
-    display: block;
-    margin: 0 auto 0.5rem;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .courses-tutoring .tutor-subject img {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 0.5rem;
-  }
-
-  .courses-tutoring .course-tile img {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 0.5rem;
-  }
-
-  .courses-tutoring .tutoring-banner {
-    margin: 1rem auto;
-  }
-
-  .courses-tutoring .tutor-subject h4 {
-    color: #ff0000;
-    font-size: 1.1em;
-    margin: 0.5rem 0 0.25rem;
-  }
-
-  .courses-tutoring .tutor-desc {
-    color: #ddd;
-    font-size: 0.9em;
-    margin: 0.25rem 0 0.75rem;
-  }
-
-  .courses-tutoring .course-tile h3 {
-    color: #fff;
-    font-size: 1.25em;
-    margin: 0.5rem 0;
-  }
-
-  .courses-tutoring .course-tile p {
-    color: #ddd;
-    font-size: 0.9em;
-  }
-
-  .courses-tutoring .buy-button {
-    display: inline-block;
-    background: #ffffff;
-    color: #ff0000;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 1rem;
-  }
-
-  .courses-tutoring .cta-button {
-    display: inline-block;
-    background: #ff0000;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 1rem auto 3rem;
-    text-align: center;
-  }
-</style>
-<!-- END: Courses & Tutoring Styles -->
-
-<div class="courses-tutoring">
-<!-- BEGIN: Tutoring Subjects Section -->
+<!-- TUTORING SUBJECTS SECTION -->
 <section id="tutoring-subjects">
   <h2>Personalized Tutoring in Every Subject We Offer</h2>
   <p class="intro">
@@ -658,148 +1058,7 @@ h2 {
   </div>
 </section>
 
-<style>
-/* Tutoring Subjects Section */
-#tutoring-subjects {
-  background: #000;
-  padding: 3rem 1rem;
-}
-#tutoring-subjects h2,
-#tutoring-subjects p.intro {
-  color: #fff;
-}
-.tutoring-banner {
-  margin: 1.5rem auto;
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-.tutor-grid {
-  background: #fff;
-  padding: 2rem 1rem;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 1rem;
-  max-width: 1200px;
-  margin: 2rem auto;
-}
-.tutor-subject {
-  background: #222;
-  border: 2px solid #ff0000;
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-}
-.tutor-subject h4 {
-  color: #ff0000;
-  font-size: 1.1em;
-  margin: 0.5rem 0;
-}
-.tutor-subject .tutor-desc {
-  color: #fff;
-  font-size: 0.9em;
-}
-.tutor-subject img {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 0.5rem;
-}
-</style>
-<!-- END: Tutoring Subjects Section -->
-
-<!-- BEGIN: Why Choose Our Tutoring Section (Mobile‐First Responsive) -->
-<style>
-  /* Container & Typography */
-  #why-choose {
-    background: #111;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    padding: 2rem 1rem;
-    box-sizing: border-box;
-  }
-
-  #why-choose h2 {
-    font-size: clamp(1.75rem, 6vw, 2.2rem);
-    text-align: center;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    white-space: normal;      /* allow wrapping on small screens */
-  }
-
-  #why-choose p {
-    max-width: 800px;
-    width: 100%;
-    margin: 0.75rem auto;
-    line-height: 1.6;
-    color: #ddd;
-    text-align: center;
-    padding: 0 0.5rem;
-    box-sizing: border-box;
-  }
-
-  /* Bullet List */
-  #why-choose ul {
-    list-style: none;
-    padding: 0;
-    margin: 2rem auto;
-    max-width: 800px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-      position: relative;
-    padding-left: 1.5em;      /* space for the custom bullet */
-    margin-bottom: 1rem;
-    color: #ddd;
-    text-align: left;         /* ensure text lines start at same point */
-  }
-
-  #why-choose ul li::before {
-    content: "♦";
-    position: absolute;
-    left: 0;
-    top: 0.2em;               /* vertically center bullet */
-    color: #FF8C00;
-    font-size: 1.1em;
-    line-height: 1;
-  }
-
-  /* Highlighted text */
-  #why-choose .highlight {
-    color: #ff0044;
-  }
-
-  /* Statistic callout */
-  #why-choose .stat {
-    text-align: center;
-    font-size: clamp(1rem, 4vw, 1.3rem);
-    margin: 2rem 0 1rem;
-    color: #ddd;
-  }
-
-    /* Mobile tweaks */
-  @media (max-width: 480px) {
-    #why-choose {
-      padding: 1.5rem 0.75rem;
-    }
-    #why-choose h2 {
-      font-size: clamp(1.5rem, 7vw, 1.9rem);
-    }
-    #why-choose p {
-      font-size: 0.95rem;
-      margin: 0.5rem auto;
-    }
-    #why-choose ul li {
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-    }
-    #why-choose .stat {
-      font-size: clamp(0.9rem, 5vw, 1.1rem);
-    }
-  }
-</style>
-
+<!-- WHY CHOOSE US SECTION -->
 <section id="why-choose">
   <h2>Why <span class="highlight">STEMSphere</span> Tutoring Is Unmatched</h2>
 
@@ -833,160 +1092,42 @@ h2 {
     <span class="highlight">Join STEMSphere today</span> and start seeing real results.
   </p>
 </section>
-<!-- END: Why Choose Our Tutoring Section -->
 
-<!-- BEGIN: Pricing & Membership Section -->
-
-<style>
-  #pricing-section {
-    background: #111;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    padding: 3rem 1rem;
-    text-align: center;
-    box-sizing: border-box;
-  }
-
-  /* Wrapper for all content (no banner image) */
-  #pricing-section .content-wrapper {
-    border: 1px solid #FFD700;
-    border-radius: 6px;
-    padding: 2rem;
-  }
-
-  #pricing-section h2 {
-    font-size: 2.2em;
-    margin: 0 0 1rem;
-  }
-
-  #pricing-section p {
-    max-width: 800px;
-    margin: 0.5rem auto 1.5rem;
-    line-height: 1.6;
-    color: #ddd;
-  }
-
-  #pricing-section .highlight {
-    color: #ff0044;
-    font-weight: bold;
-  }
-
-  #pricing-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 2rem auto;
-    max-width: 700px;
-    text-align: left;
-  }
-
-  #pricing-section ul li {
-    position: relative;
-    padding-left: 2em;
-    margin: 1rem 0;
-    color: #ddd;
-  }
-
-  #pricing-section ul li::before {
-    content: "➤";
-    position: absolute;
-    left: 0;
-    color: #FF8C00;
-    font-size: 1.2em;
-    line-height: 1;
-  }
-
-  /* Converter Container */
-  #pricing-section .conversion-box {
-    margin: 2rem auto 0;
-    padding: 1rem;
-    background: #222;
-    border-radius: 6px;
-    max-width: 600px;
-    text-align: center;
-  }
-
-  #oanda_ecc {
-    width: 100%;
-  }
-
-  #oanda_ecc span {
-    color: #fff;
-    font-size: 0.85em;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-</style>
-
+<!-- PRICING SECTION (6-10 GROUP TIER REMOVED) -->
 <section id="pricing-section">
   <div class="content-wrapper">
-
-    <!-- Title -->
     <h2>What Are Our Costs?</h2>
 
-    <!-- Membership Description -->
     <p>
       We offer flexible memberships designed to fit your learning style.  
       Each plan includes <span class="highlight">16 sessions over 8 weeks</span>, with classes held <span class="highlight">twice a week per subject</span>.  
       Students often stack multiple subjects to build a schedule that fits their goals and pace.
     </p>
 
-    <!-- Pricing Tiers -->
     <ul>
       <li><span class="highlight">1-on-1 Private Tutoring</span> — $2000 USD per plan</li>
       <li class="most-popular">
         <div class="badge">Most Popular</div>
         <span class="highlight">Small Group (up to 4 students)</span> — $799 USD per plan
       </li>
-      <li><span class="highlight">Mid Group Class (6–10 students)</span> — $375 USD per plan</li>
     </ul>
 
-    <!-- Currency Support Info -->
     <p>
       We accept payments in <span class="highlight">most global currencies</span>, including USD, EUR, GBP, NGN, INR, CAD, AUD, JPY, HKD, SGD, PHP, KRW, MYR, THB, TWD, ZAR, BRL, MXN, and more.  
       Use the converter below to estimate your local cost.
     </p>
 
-    <!-- Currency Converter (OANDA Widget) -->
     <div class="conversion-box">
       <div id="oanda_ecc">
         <span>Currency Converter by OANDA</span>
         <script src="https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en"></script>
       </div>
     </div>
-
-  </div><!-- /.content-wrapper -->
+  </div>
 </section>
 
-<!-- Styling for Most Popular Badge -->
-<style>
-  #pricing-section ul li.most-popular {
-    border: 2px solid #FFD700;
-    border-radius: 6px;
-    padding: 1rem;
-    background: #222;
-    position: relative;
-  }
-  #pricing-section ul li.most-popular .badge {
-    position: absolute;
-    top: -12px;
-    left: 15px;
-    background: #FFD700;
-    color: #000;
-    font-weight: bold;
-    font-size: 0.8em;
-    padding: 3px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-</style>
-
-<!-- END: Pricing & Membership Section -->
-
-<!-- ─── Blog Section ────────────────────────────────────────── -->
+<!-- BLOG SECTION -->
 <section id="blog">
-
-  <!-- Chemistry Blog -->
   <article class="blog-post">
     <h2 class="blog-title">Why Immersive Chemistry Tutoring Works</h2>
     <p class="blog-body">
@@ -1013,7 +1154,6 @@ h2 {
     </ul>
   </article>
 
-  <!-- Math Blog -->
   <article class="blog-post">
     <h2 class="blog-title">Why Immersive Math Tutoring Works</h2>
     <p class="blog-body">
@@ -1024,7 +1164,7 @@ h2 {
       Families in <strong>Chicago</strong> choose us for <strong>algebra mastery</strong>, while
       students in <strong>Hong Kong</strong> and <strong>Singapore</strong> rely on us for
       <strong>IB Math SL/HL prep</strong> and <strong>HKAT math tutoring</strong>.
-        </p>
+    </p>
     <p class="blog-body">
       Whether it's derivatives in calculus, probability in statistics, or geometry foundations,
       STEMSphere Academy ensures every learner gains confidence, speed, and exam‑ready precision.
@@ -1035,122 +1175,23 @@ h2 {
       <li>AP Calculus tutor online</li>
       <li>IB Math HL tutoring New York</li>
       <li>Geometry enrichment classes California</li>
-      <li>Algebra tutor Chicago</li>
+            <li>Algebra tutor Chicago</li>
       <li>HKAT math tutoring Hong Kong</li>
       <li>IB Math SL/HL prep Singapore</li>
     </ul>
   </article>
-
 </section>
 
-<style>
-/* Blog styling */
-#blog {
-  margin: 0;
-  padding: 3em 2em;
-  background: #fff;
-  width: 100%;
-  box-sizing: border-box;
-}
-.blog-post {
-  margin: 0 auto 3em;
-  max-width: 850px;
-}
-.blog-title {
-  color: tomato !important;   /* ✅ force tomato red */
-  font-size: 1.8em;
-  margin-bottom: 0.5em;
-  text-align: center;
-}
-.blog-subtitle {
-  color: #000;
-  font-size: 1.1em;
-  margin-top: 1em;
-  text-align: left;
-}
-.blog-body {
-  color: #000;
-  line-height: 1.6;
-  text-align: left;
-}
-.blog-topics {
-  list-style-type: disc;
-  padding-left: 1.5em;
-  color: #000;
-  text-align: left;
-}
-.blog-topics li {
-  margin: 0.25em 0;
-}
-</style>
-<!-- ─── End blog section ────────────────────────────────────── -->
-
-
-<!-- BEGIN: FAQ & Contact Section -->
-<style>
-  /* FAQ & Contact Styles */
-  #faq-contact {
-    background: #111;
-    color: #fff;
-    padding: 2rem 1rem;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-  }
-  #faq-contact h3 {
-    text-align: center;
-    font-size: 1.8em;
-    margin-bottom: 1rem;
-    color: #fff;
-  }
-  #faq-contact details {
-    margin: 1rem auto;
-    max-width: 800px;
-    background: #222;
-    border-radius: 4px;
-    padding: 0.75rem 1rem;
-    box-sizing: border-box;
-  }
-  #faq-contact summary {
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 700;
-    color: #00dffc;
-    outline: none;
-  }
-  #faq-contact details p {
-    margin: 0.5rem 0 0 1.25em;
-    line-height: 1.5;
-    color: #ddd;
-  }
-  footer {
-    background: #000;
-    color: #bbb;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    font-size: 0.9em;
-    line-height: 1.4;
-  }
-  .footer-links a,
-  .footer-contact a {
-    color: #00dffc;
-    text-decoration: none;
-    margin: 0 0.5rem;
-  }
-  .footer-links a:hover,
-  .footer-contact a:hover {
-    text-decoration: underline;
-  }
-</style>
-
+<!-- FAQ & CONTACT SECTION -->
 <section id="faq-contact">
   <h3>Frequently Asked Questions</h3>
 
   <details>
     <summary>How do I book a free session?</summary>
-    <p> Its not a free trial but more of a free diagnostics. We offer a free diagnostics/ mini session with one of our enrollments specilaist. The goal of our enrollments sepcialist is to match you with a tutor that fits your learning style. Click the "Book Your Free Trial" button above or reach out to us via email. We'll schedule your session within 24 hours and match you with the perfect tutor.</p>
+    <p>It's not a free trial but more of a free diagnostics. We offer a free diagnostics/mini session with one of our enrollment specialists. The goal is to match you with a tutor that fits your learning style. Click the "Book Your Enrollment Session" button above or reach out via email. We'll schedule your session within 24 hours.</p>
   </details>
 
-   <details>
+  <details>
     <summary>What subjects and levels do you cover?</summary>
     <p>We offer personalized tutoring in Math, Chemistry, Biology, Coding, English, Public Speaking, SAT/ACT prep, and more—from elementary through adult learners.</p>
   </details>
@@ -1162,20 +1203,34 @@ h2 {
 
   <details>
     <summary>How do I pay and what are your rates?</summary>
-    <p>We accept all major credit cards and PayPal. Rates vary by tutor and format; view detailed pricing on our Pricing page or email support for a custom package.</p>
+    <p>We accept all major credit cards and PayPal. Rates vary by tutor and format; view detailed pricing above or email support for a custom package.</p>
+  </details>
+
+  <details>
+    <summary>Do you offer group discounts?</summary>
+    <p>Yes! Our Small Group (up to 4 students) plan is our most popular option at $799 USD. It's perfect for friends or siblings learning together.</p>
+  </details>
+
+  <details>
+    <summary>What if I need to learn multiple subjects?</summary>
+    <p>Students often stack multiple subjects! Each membership covers one subject, but you can purchase multiple plans to create a custom schedule that fits your goals.</p>
   </details>
 </section>
-<!-- END: FAQ & Contact Section -->
 
+<!-- FOOTER -->
 <footer>
-  © 2025 STEMSphere Academy. All rights reserved.
+  <p>© 2025 STEMSphere Academy. All rights reserved.</p>
   <nav class="footer-links">
     <a href="#faq-contact">FAQs</a> |
-    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/privacy.html">Privacy Policy</a> |
+    <a href="https://www.facebook.com/STEMxSphere" target="_blank">Facebook</a>
   </nav>
   <p class="footer-contact">
     Need help? Contact us at 
     <a href="mailto:support@stemsphere.academy">support@stemsphere.academy</a>
+  </p>
+  <p style="margin-top: 1rem; font-size: 0.85em; opacity: 0.6;">
+    312 W 2nd Street #A8380, Casper, WY 82601, USA
   </p>
 </footer>
 
