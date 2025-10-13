@@ -277,7 +277,7 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   🚀 CTA BUTTON
+   🚀 CTA BUTTON (GREEN)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #highIntentCTA {
   position: relative;
@@ -288,14 +288,14 @@ h2.subtitle {
 
 #highIntentCTA a {
   display: inline-block;
-  background: linear-gradient(135deg, #ff0000, #ff6b6b);
+  background: linear-gradient(135deg, #00c853, #00e676);
   color: #fff;
   font-size: clamp(1.1rem, 3vw, 1.5rem);
   font-weight: 800;
   padding: 1.2rem 2.5rem;
   border-radius: 12px;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0,200,83,0.5);
   transition: all 0.3s;
   position: relative;
   z-index: 1;
@@ -303,7 +303,7 @@ h2.subtitle {
 
 #highIntentCTA a:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(255,0,0,0.7);
+  box-shadow: 0 15px 40px rgba(0,200,83,0.7);
 }
 
 #highIntentCTA::before {
@@ -328,7 +328,7 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ⭐ REVIEWS SECTION
+   ⭐ REVIEWS SECTION (WHITE TEXT BUTTONS)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #reviews-container {
   background: rgba(255,255,255,0.1);
@@ -346,6 +346,19 @@ h2.subtitle {
   color: #FFD700;
 }
 
+#reviews-container button {
+  background: none;
+  border: none;
+  color: #ffffff !important;
+  cursor: pointer;
+  font-size: 0.95em;
+  text-decoration: underline;
+}
+
+#reviews-container button:hover {
+  color: #00c6ff !important;
+}
+
 #reviews-body {
   background: rgba(0,0,0,0.4);
   border-radius: 12px;
@@ -354,7 +367,7 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   📚 SUBJECTS SECTION
+   📚 SUBJECTS SECTION (BLUE HOVER)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #tutoring-subjects {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -383,6 +396,7 @@ h2.subtitle {
 .tutoring-banner {
   width: 100%;
   max-width: 900px;
+  display: block;
   margin: 2rem auto;
   border-radius: 16px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.4);
@@ -416,15 +430,15 @@ h2.subtitle {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,198,255,0.15) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .tutor-subject:hover {
   transform: translateY(-10px);
-  border-color: #ff0000;
-  box-shadow: 0 20px 40px rgba(255,0,0,0.3);
+  border-color: #00c6ff;
+  box-shadow: 0 20px 40px rgba(0,198,255,0.4);
 }
 
 .tutor-subject:hover::before {
@@ -439,7 +453,7 @@ h2.subtitle {
 }
 
 .tutor-subject h4 {
-  color: #ff0000;
+  color: #00c6ff;
   font-size: 1.3em;
   margin: 1rem 0 0.5rem;
   font-weight: 700;
@@ -479,6 +493,15 @@ h2.subtitle {
   background-clip: text;
 }
 
+#pricing-section p {
+  text-align: center;
+  max-width: 800px;
+  margin: 1rem auto;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+}
+
 #pricing-section ul {
   list-style: none;
   padding: 0;
@@ -495,6 +518,7 @@ h2.subtitle {
   margin: 1.5rem 0;
   position: relative;
   transition: all 0.3s;
+  font-size: 1.1rem;
 }
 
 #pricing-section ul li:hover {
@@ -548,6 +572,116 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📚 EBOOK RESOURCES SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#ebook-resources {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 4rem 1rem;
+  position: relative;
+}
+
+#ebook-resources h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#ebook-resources p.intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.8;
+}
+
+.ebook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.ebook-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.ebook-card:hover {
+  transform: translateY(-10px);
+  border-color: #00c6ff;
+  box-shadow: 0 20px 40px rgba(0,198,255,0.4);
+}
+
+.ebook-card img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.ebook-card h3 {
+  color: #FFD700;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  font-weight: 700;
+}
+
+.ebook-card p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.ebook-card .ebook-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #00c853, #00e676);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0,200,83,0.4);
+}
+
+.ebook-card .ebook-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,200,83,0.6);
+}
+
+.free-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff0000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(255,0,0,0.5);
+  animation: pulse 2s infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    🎯 WHY CHOOSE US SECTION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #why-choose {
@@ -563,7 +697,7 @@ h2.subtitle {
 }
 
 #why-choose .highlight {
-  color: #ff0000;
+  color: #00c6ff;
   font-weight: 700;
 }
 
@@ -607,8 +741,8 @@ h2.subtitle {
   font-size: clamp(1.2rem, 4vw, 1.8rem);
   margin: 3rem auto;
   padding: 2rem;
-  background: rgba(255,0,0,0.1);
-  border-left: 5px solid #ff0000;
+  background: rgba(0,198,255,0.1);
+  border-left: 5px solid #00c6ff;
   border-radius: 8px;
   max-width: 700px;
 }
@@ -764,14 +898,15 @@ footer {
    📱 MOBILE RESPONSIVENESS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media (max-width: 768px) {
+  /* Keep brand on left side on mobile */
   .brand {
-    position: static;
-    justify-content: center;
-    margin-bottom: 1rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
   }
 
   .title-group {
-    margin-top: 2rem;
+    margin-top: 5rem;
   }
 
   #highIntentCTA::before {
@@ -784,12 +919,46 @@ footer {
     gap: 1rem;
   }
 
+  .ebook-grid {
+    grid-template-columns: 1fr;
+  }
+
   #pricing-section .content-wrapper {
     padding: 2rem 1rem;
   }
 
   .blog-post {
     padding: 1.5rem;
+  }
+
+  /* Ensure login link doesn't overlap brand */
+  .login-link {
+    top: 60px;
+    font-size: 0.85em;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    font-size: 1em;
+  }
+
+  .brand-text {
+    font-size: 1.1em;
+  }
+
+  #fallback-translator {
+    top: 8px;
+    right: 8px;
+    padding: 4px 6px;
+  }
+
+  #fallback-translator select {
+    font-size: 12px;
+    padding: 3px 5px;
   }
 }
   </style>
@@ -867,7 +1036,7 @@ footer {
   </video>
 </div>
 
-<!-- CTA BUTTON -->
+<!-- CTA BUTTON (GREEN) -->
 <div id="highIntentCTA">
   <a href="https://learn.stemsphere.academy/login.html">
     🚀 Book Your Enrollment Session Now
@@ -904,7 +1073,7 @@ footer {
   const avg = (reviews.reduce((sum, r) => sum + (parseFloat(r[2])||0), 0) / reviews.length).toFixed(1);
   const count = reviews.length;
 
-  const wrapper = document.createElement('div');
+    const wrapper = document.createElement('div');
   wrapper.innerHTML = `
     <div style="margin-bottom:0.8em;">
       <span style="background:#007bff; color:#fff; padding:0.4em 1em; border-radius:20px; font-size:0.95em; font-weight:bold; display:inline-block;">
@@ -916,10 +1085,10 @@ footer {
       ${avg} (${count} review${count>1?'s':''})
     </h3>
     <div style="margin:1em 0; display:flex; justify-content:center; gap:1.5em;">
-      <button id="toggle-reviews" style="background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em;">
+      <button id="toggle-reviews" style="background:none; border:none; color:#ffffff; cursor:pointer; font-size:0.95em; text-decoration:underline;">
         See all reviews
       </button>
-      <button id="submit-review" style="background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em;">
+      <button id="submit-review" style="background:none; border:none; color:#ffffff; cursor:pointer; font-size:0.95em; text-decoration:underline;">
         Submit a review
       </button>
     </div>
@@ -931,9 +1100,9 @@ footer {
   let currentIndex = 0;
   const batchSize = 20;
 
-    const seeMoreBtn = document.createElement('button');
+  const seeMoreBtn = document.createElement('button');
   seeMoreBtn.textContent = 'See more reviews';
-  seeMoreBtn.style.cssText = "background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em; margin-top:1em; display:block;";
+  seeMoreBtn.style.cssText = "background:none; border:none; color:#ffffff; cursor:pointer; font-size:0.95em; margin-top:1em; display:block; text-decoration:underline;";
   seeMoreBtn.addEventListener('click', renderNextBatch);
 
   function renderNextBatch() {
@@ -1093,7 +1262,7 @@ footer {
   </p>
 </section>
 
-<!-- PRICING SECTION (6-10 GROUP TIER REMOVED) -->
+<!-- PRICING SECTION -->
 <section id="pricing-section">
   <div class="content-wrapper">
     <h2>What Are Our Costs?</h2>
@@ -1122,6 +1291,35 @@ footer {
         <span>Currency Converter by OANDA</span>
         <script src="https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en"></script>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- EBOOK RESOURCES SECTION -->
+<section id="ebook-resources">
+  <h2>📚 Free Learning Resources</h2>
+  <p class="intro">
+    Download our expertly crafted eBooks designed to help you excel in STEM subjects and prepare for college success.  
+    These guides contain proven strategies used by top students worldwide.
+  </p>
+
+  <div class="ebook-grid">
+    <!-- eBook 1 -->
+    <div class="ebook-card">
+      <div class="free-badge">FREE!</div>
+      <img src="https://i.postimg.cc/s24NgxkN/gemini-2-5-flash-image-preview-nano-banana-i-need-an-ebook-cove-2.png" alt="STEM Study System eBook">
+      <h3>The STEM Student's Secret Study System</h3>
+      <p>Master math and science with proven techniques from top students. Learn the 3-step formula for acing exams.</p>
+      <a href="https://books.stemsphere.academy" class="ebook-button">Download Free</a>
+    </div>
+
+        <!-- eBook 2 -->
+    <div class="ebook-card">
+      <div class="free-badge">FREE!</div>
+      <img src="https://i.postimg.cc/N03SnR7V/ergh.png" alt="College Prep Secrets eBook">
+      <h3>College Prep Secrets for Parents</h3>
+      <p>The insider's guide to preparing your teen for college. Learn what schools don't tell you about admissions and scholarships.</p>
+      <a href="https://books.stemsphere.academy" class="ebook-button">Download Free</a>
     </div>
   </div>
 </section>
@@ -1175,7 +1373,7 @@ footer {
       <li>AP Calculus tutor online</li>
       <li>IB Math HL tutoring New York</li>
       <li>Geometry enrichment classes California</li>
-            <li>Algebra tutor Chicago</li>
+      <li>Algebra tutor Chicago</li>
       <li>HKAT math tutoring Hong Kong</li>
       <li>IB Math SL/HL prep Singapore</li>
     </ul>
@@ -1214,6 +1412,11 @@ footer {
   <details>
     <summary>What if I need to learn multiple subjects?</summary>
     <p>Students often stack multiple subjects! Each membership covers one subject, but you can purchase multiple plans to create a custom schedule that fits your goals.</p>
+  </details>
+
+  <details>
+    <summary>Are the eBooks really free?</summary>
+    <p>Yes! Both eBooks are 100% free. No credit card required. Just enter your email and download instantly. We created these resources to help students succeed.</p>
   </details>
 </section>
 
