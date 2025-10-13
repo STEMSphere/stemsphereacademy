@@ -1036,7 +1036,7 @@ footer {
   </video>
 </div>
 
-<!-- CTA BUTTON (GREEN) -->
+<!-- CTA BUTTON -->
 <div id="highIntentCTA">
   <a href="https://learn.stemsphere.academy/login.html">
     🚀 Book Your Enrollment Session Now
@@ -1073,7 +1073,7 @@ footer {
   const avg = (reviews.reduce((sum, r) => sum + (parseFloat(r[2])||0), 0) / reviews.length).toFixed(1);
   const count = reviews.length;
 
-    const wrapper = document.createElement('div');
+  const wrapper = document.createElement('div');
   wrapper.innerHTML = `
     <div style="margin-bottom:0.8em;">
       <span style="background:#007bff; color:#fff; padding:0.4em 1em; border-radius:20px; font-size:0.95em; font-weight:bold; display:inline-block;">
@@ -1085,10 +1085,10 @@ footer {
       ${avg} (${count} review${count>1?'s':''})
     </h3>
     <div style="margin:1em 0; display:flex; justify-content:center; gap:1.5em;">
-      <button id="toggle-reviews" style="background:none; border:none; color:#ffffff; cursor:pointer; font-size:0.95em; text-decoration:underline;">
+      <button id="toggle-reviews" style="background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em;">
         See all reviews
       </button>
-      <button id="submit-review" style="background:none; border:none; color:#ffffff; cursor:pointer; font-size:0.95em; text-decoration:underline;">
+      <button id="submit-review" style="background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em;">
         Submit a review
       </button>
     </div>
@@ -1100,9 +1100,9 @@ footer {
   let currentIndex = 0;
   const batchSize = 20;
 
-  const seeMoreBtn = document.createElement('button');
+    const seeMoreBtn = document.createElement('button');
   seeMoreBtn.textContent = 'See more reviews';
-  seeMoreBtn.style.cssText = "background:none; border:none; color:#ffffff; cursor:pointer; font-size:0.95em; margin-top:1em; display:block; text-decoration:underline;";
+  seeMoreBtn.style.cssText = "background:none; border:none; color:#00c6ff; cursor:pointer; font-size:0.95em; margin-top:1em; display:block;";
   seeMoreBtn.addEventListener('click', renderNextBatch);
 
   function renderNextBatch() {
