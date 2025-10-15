@@ -6,7 +6,7 @@
   <title>Teach at STEMSphere Academy | Apply Now</title>
   <meta name="description" content="Join the STEMSphere Academy team. Apply to become a tutor and help transform students' lives.">
   
-  <link rel="icon" type="image/png" sizes="32x32" href="https://stemsphere.academy/assets/favconsp1.2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://learn.stemsphere.academy/assets/favconsp1.2.png">
   
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -576,7 +576,7 @@
       <div class="form-section">
         <h2 class="section-title">💻 Technology & Internet Readiness</h2>
         
-        <div class="form-group">
+              <div class="form-group">
           <label>Do you have a computer or tablet suitable for online tutoring? <span class="required">*</span></label>
           <div class="radio-group">
             <div class="radio-item">
@@ -595,7 +595,7 @@
         </div>
       </div>
 
-          <!-- Sample Teaching Video -->
+      <!-- Sample Teaching Video -->
       <div class="form-section">
         <h2 class="section-title">
           🎥 Sample Teaching Video Submission
@@ -652,9 +652,9 @@
     // ============================================
     // SUPABASE CONFIGURATION
     // ============================================
-    // Replace these with your actual Supabase credentials
-    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    
+    const SUPABASE_URL = 'https://horqtcwnhwgodwlyqhli.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvcnF0Y3duaHdnb2R3bHlxaGxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NjAyNzEsImV4cCI6MjA3NTMzNjI3MX0.4rYzW6MFEkVVqLor55RuFGLwE6WBJrYLxvYbgeXXRGU';
     
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -756,7 +756,7 @@
         throw error;
       }
       
-      // Get public URL
+      // Get public URL (files are protected by RLS)
       const { data: urlData } = supabase.storage
         .from('teacher-applications')
         .getPublicUrl(filePath);
