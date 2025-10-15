@@ -8,6 +8,9 @@
   
   <link rel="icon" type="image/png" sizes="32x32" href="https://stemsphere.academy/assets/favconsp1.2.png">
   
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
   <style>
     * {
       margin: 0;
@@ -273,6 +276,41 @@
       font-style: italic;
     }
 
+    /* Progress Bar */
+    .upload-progress {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+    }
+
+    .upload-progress.show {
+      display: block;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    .progress-text {
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
     /* Submit Button */
     .submit-button {
       width: 100%;
@@ -351,6 +389,7 @@
 
     .error-message.show {
       display: block;
+      animation: slideDown 0.5s ease-out;
     }
 
     /* Responsive */
@@ -413,33 +452,43 @@
     <!-- Error Message -->
     <div class="error-message" id="errorMessage">
       <strong>⚠️ Submission Error</strong>
-      <p>There was a problem submitting your application. Please try again or contact us at <a href="mailto:support@stemsphere.academy" style="color: #fff;">support@stemsphere.academy</a></p>
+      <p id="errorText">There was a problem submitting your application. Please try again.</p>
     </div>
 
-    <form class="application-form" id="teacherApplicationForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+    <form class="application-form" id="teacherApplicationForm">
       
       <!-- Personal Information -->
       <div class="form-section">
         <h2 class="section-title">📋 Personal Information</h2>
         
         <div class="form-group">
+          <label>Profile Photo <span class="required">*</span></label>
+          <p class="description-text">Upload a professional headshot photo for your teacher profile.</p>
+          <div class="file-upload">
+            <input type="file" name="profilePhoto" id="profilePhoto" accept=".jpg,.jpeg,.png" required>
+          </div>
+          <p class="file-note">JPG or PNG format, max 5MB</p>
+        </div>
+
+        <div class="form-group">
           <label>Full Name <span class="required">*</span></label>
-          <input type="text" name="fullName" required placeholder="Enter your full name">
+          <input type="text" name="fullName" id="fullName" required placeholder="Enter your full name">
         </div>
 
         <div class="form-group">
           <label>Email Address <span class="required">*</span></label>
-          <input type="email" name="email" required placeholder="your.email@example.com">
+          <input type="email" name="email" id="email" required placeholder="your.email@example.com">
         </div>
 
         <div class="form-group">
           <label>Country <span class="required">*</span></label>
-          <input type="text" name="country" required placeholder="Enter your country">
+          <input type="text" name="country" id="country" required placeholder="Enter your country">
         </div>
 
         <div class="form-group">
-          <label>Expected Monthly Pay (USD) for Full-Time <span class="required">*</span></label>
-          <input type="number" name="expectedPay" required placeholder="e.g., 3000" min="0" step="100">
+          <label>Expected Monthly Pay for Full-Time <span class="required">*</span></label>
+          <input type="number" name="expectedPay" id="expectedPay" required placeholder="e.g., 3000" min="0" step="100">
+          <p class="file-note">Enter amount in your local currency</p>
         </div>
       </div>
 
@@ -483,7 +532,7 @@
 
         <div class="form-group" id="otherSubjectGroup" style="display:none;">
           <label>Please specify other subject(s)</label>
-          <input type="text" name="otherSubject" placeholder="e.g., Economics, History">
+          <input type="text" name="otherSubject" id="otherSubject" placeholder="e.g., Economics, History">
         </div>
 
         <div class="form-group">
@@ -515,9 +564,9 @@
         <p class="description-text">Upload any relevant certifications, degrees, or documents verifying your expertise.</p>
         
         <div class="form-group">
-          <label>Upload Certifications (PDF, JPG, PNG - Max 10MB)</label>
+          <label>Upload Certifications (PDF, JPG, PNG - Max 10MB each)</label>
           <div class="file-upload">
-            <input type="file" name="certifications" accept=".pdf,.jpg,.jpeg,.png" multiple>
+            <input type="file" name="certifications" id="certifications" accept=".pdf,.jpg,.jpeg,.png" multiple>
           </div>
           <p class="file-note">You can select multiple files</p>
         </div>
@@ -546,7 +595,7 @@
         </div>
       </div>
 
-      <!-- Sample Teaching Video -->
+          <!-- Sample Teaching Video -->
       <div class="form-section">
         <h2 class="section-title">
           🎥 Sample Teaching Video Submission
@@ -559,7 +608,7 @@
         <div class="form-group">
           <label>Upload Teaching Video (MP4, MOV, AVI - Max 100MB)</label>
           <div class="file-upload">
-            <input type="file" name="teachingVideo" accept="video/mp4,video/quicktime,video/x-msvideo">
+            <input type="file" name="teachingVideo" id="teachingVideo" accept="video/mp4,video/quicktime,video/x-msvideo">
           </div>
           <p class="file-note">Or provide a YouTube/Google Drive link in the "Why Join" section below</p>
         </div>
@@ -571,25 +620,154 @@
         
         <div class="form-group">
           <label>Why do you want to tutor at STEMSphere Academy? <span class="required">*</span></label>
-          <p class="description-text">Share your motivation for joining STEMSphere Academy and what you hope to contribute.</p>
-          <textarea name="whyJoin" required placeholder="Tell us about your passion for teaching, your experience, and why STEMSphere Academy is the right fit for you. If you have a video link, include it here."></textarea>
+          <p class="description-text">Share your motivation for joining STEMSphere Academy and what you hope to contribute. If you have a video link (YouTube/Google Drive), include it here.</p>
+          <textarea name="whyJoin" id="whyJoin" required placeholder="Tell us about your passion for teaching, your experience, and why STEMSphere Academy is the right fit for you. If you have a video link, include it here."></textarea>
+        </div>
+
+        <div style="background: rgba(0,198,255,0.1); border-left: 4px solid #00c6ff; padding: 1rem; border-radius: 8px; margin-top: 2rem;">
+          <p style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>📧 Having trouble uploading files?</strong><br>
+            If you experience any issues with file uploads, please email your application materials directly to 
+            <a href="mailto:support@stemsphere.academy" style="color: #FFD700; text-decoration: underline;">support@stemsphere.academy</a> 
+            and we'll assist you promptly.
+          </p>
         </div>
       </div>
 
-           <button type="submit" class="submit-button" id="submitButton">
+      <!-- Upload Progress -->
+      <div class="upload-progress" id="uploadProgress">
+        <p class="progress-text" id="progressText">Preparing submission...</p>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button" id="submitButton">
         🚀 Submit Application
       </button>
     </form>
   </div>
 
   <script>
+    // ============================================
+    // SUPABASE CONFIGURATION
+    // ============================================
+    // Replace these with your actual Supabase credentials
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ============================================
+    // FORM INTERACTIVITY
+    // ============================================
+    
     // Show/hide "Other Subject" field
     document.getElementById('other').addEventListener('change', function() {
       const otherGroup = document.getElementById('otherSubjectGroup');
       otherGroup.style.display = this.checked ? 'block' : 'none';
     });
 
-    // Form submission handling
+    // ============================================
+    // FILE UPLOAD VALIDATION
+    // ============================================
+    
+    const certInput = document.querySelector('input[name="certifications"]');
+    const videoInput = document.querySelector('input[name="teachingVideo"]');
+    const profilePhotoInput = document.querySelector('input[name="profilePhoto"]');
+
+    // Profile photo validation
+    if (profilePhotoInput) {
+      profilePhotoInput.addEventListener('change', function() {
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        if (this.files[0] && this.files[0].size > maxSize) {
+          alert('Profile photo is too large. Maximum size is 5MB.');
+          this.value = '';
+          return;
+        }
+        
+        // Check if it's an image
+        const file = this.files[0];
+        if (file && !file.type.startsWith('image/')) {
+          alert('Please upload an image file (JPG or PNG).');
+          this.value = '';
+        }
+      });
+    }
+
+    // Certifications validation
+    if (certInput) {
+      certInput.addEventListener('change', function() {
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        for (let file of this.files) {
+          if (file.size > maxSize) {
+            alert(`File "${file.name}" is too large. Maximum size is 10MB per file.`);
+            this.value = '';
+            return;
+          }
+        }
+      });
+    }
+
+    // Video validation
+    if (videoInput) {
+      videoInput.addEventListener('change', function() {
+        const maxSize = 100 * 1024 * 1024; // 100MB
+        if (this.files[0] && this.files[0].size > maxSize) {
+          alert('Video file is too large. Maximum size is 100MB. Consider uploading to YouTube or Google Drive and sharing the link in the "Why Join" section instead.');
+          this.value = '';
+        }
+      });
+    }
+
+    // ============================================
+    // PROGRESS BAR HELPER
+    // ============================================
+    
+    function updateProgress(text, percentage) {
+      document.getElementById('progressText').textContent = text;
+      document.getElementById('progressFill').style.width = percentage + '%';
+    }
+
+    function showProgress() {
+      document.getElementById('uploadProgress').classList.add('show');
+    }
+
+    function hideProgress() {
+      document.getElementById('uploadProgress').classList.remove('show');
+      updateProgress('Preparing submission...', 0);
+    }
+
+    // ============================================
+    // FILE UPLOAD TO SUPABASE STORAGE
+    // ============================================
+    
+    async function uploadFile(file, folder) {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `${folder}/${fileName}`;
+
+      const { data, error } = await supabase.storage
+        .from('teacher-applications')
+        .upload(filePath, file);
+
+      if (error) {
+        console.error('Upload error:', error);
+        throw error;
+      }
+      
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from('teacher-applications')
+        .getPublicUrl(filePath);
+
+      return urlData.publicUrl;
+    }
+
+    // ============================================
+    // FORM SUBMISSION HANDLER
+    // ============================================
+    
     const form = document.getElementById('teacherApplicationForm');
     const submitButton = document.getElementById('submitButton');
     const successMessage = document.getElementById('successMessage');
@@ -612,27 +790,90 @@
       // Hide any previous messages
       successMessage.classList.remove('show');
       errorMessage.classList.remove('show');
+      
+      // Show progress bar
+      showProgress();
 
       try {
-        // Create FormData object
-        const formData = new FormData(form);
+        // Collect form data
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const country = document.getElementById('country').value;
+        const expectedPay = parseFloat(document.getElementById('expectedPay').value);
+        const otherSubject = document.getElementById('otherSubject').value;
+        const experience = document.querySelector('input[name="experience"]:checked').value;
+        const device = document.querySelector('input[name="device"]:checked').value;
+        const whyJoin = document.getElementById('whyJoin').value;
         
-        // Collect all selected subjects into a single field
+        // Collect selected subjects
         const selectedSubjects = Array.from(checkboxes).map(cb => cb.value);
-        formData.delete('subjects'); // Remove individual checkbox values
-        formData.append('subjects', selectedSubjects.join(', '));
 
-        // Submit to Formspree
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
+        // ============================================
+        // UPLOAD FILES
+        // ============================================
+        
+        // Upload profile photo (REQUIRED)
+        updateProgress('Uploading profile photo...', 20);
+        let profilePhotoUrl = null;
+        const profilePhotoFile = document.getElementById('profilePhoto').files[0];
+        if (profilePhotoFile) {
+          profilePhotoUrl = await uploadFile(profilePhotoFile, 'profile-photos');
+        }
+
+        // Upload certifications (if any)
+        let certificationsUrls = [];
+        const certFiles = document.getElementById('certifications').files;
+        if (certFiles.length > 0) {
+          updateProgress('Uploading certifications...', 40);
+          for (let file of certFiles) {
+            const url = await uploadFile(file, 'certifications');
+            certificationsUrls.push(url);
           }
-        });
+        }
 
-        if (response.ok) {
-          // Success!
+        // Upload teaching video (if any)
+        let videoUrl = null;
+        const videoFile = document.getElementById('teachingVideo').files[0];
+        if (videoFile) {
+          updateProgress('Uploading teaching video...', 60);
+          videoUrl = await uploadFile(videoFile, 'videos');
+        }
+
+        // ============================================
+        // SAVE TO DATABASE
+        // ============================================
+        
+        updateProgress('Saving application...', 80);
+        const { data, error } = await supabase
+          .from('teacher_applications')
+          .insert([{
+            full_name: fullName,
+            email: email,
+            country: country,
+            expected_monthly_pay: expectedPay,
+            subjects: selectedSubjects,
+            other_subject: otherSubject || null,
+            years_of_experience: experience,
+            has_computer: device,
+            why_join: whyJoin,
+            profile_photo_url: profilePhotoUrl,
+            certifications_url: certificationsUrls.length > 0 ? certificationsUrls.join(',') : null,
+            video_url: videoUrl,
+            status: 'pending'
+          }]);
+
+        if (error) {
+          throw error;
+        }
+
+        // ============================================
+        // SUCCESS!
+        // ============================================
+        
+        updateProgress('Application submitted successfully!', 100);
+        
+        setTimeout(() => {
+          hideProgress();
           successMessage.classList.add('show');
           form.style.display = 'none';
           
@@ -641,46 +882,26 @@
           
           // Reset form
           form.reset();
-        } else {
-          throw new Error('Form submission failed');
-        }
+        }, 1000);
+
       } catch (error) {
         console.error('Error:', error);
+        hideProgress();
+        
+        document.getElementById('errorText').innerHTML = `
+          There was a problem submitting your application: <strong>${error.message}</strong><br><br>
+          Please try again or email your application materials to 
+          <a href="mailto:support@stemsphere.academy" style="color: #fff; text-decoration: underline;">support@stemsphere.academy</a>
+        `;
         errorMessage.classList.add('show');
         errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
       } finally {
         // Re-enable submit button
         submitButton.disabled = false;
         submitButton.textContent = '🚀 Submit Application';
       }
     });
-
-    // File upload validation
-    const certInput = document.querySelector('input[name="certifications"]');
-    const videoInput = document.querySelector('input[name="teachingVideo"]');
-
-    if (certInput) {
-      certInput.addEventListener('change', function() {
-        const maxSize = 10 * 1024 * 1024; // 10MB
-        for (let file of this.files) {
-          if (file.size > maxSize) {
-            alert(`File "${file.name}" is too large. Maximum size is 10MB.`);
-            this.value = '';
-            return;
-          }
-        }
-      });
-    }
-
-    if (videoInput) {
-      videoInput.addEventListener('change', function() {
-        const maxSize = 100 * 1024 * 1024; // 100MB
-        if (this.files[0] && this.files[0].size > maxSize) {
-          alert('Video file is too large. Maximum size is 100MB. Consider uploading to YouTube or Google Drive and sharing the link instead.');
-          this.value = '';
-        }
-      });
-    }
   </script>
 
   <!-- Footer -->
