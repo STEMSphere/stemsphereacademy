@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teach at STEMSphere Academy | Apply Now</title>
+  <meta name="description" content="Join the STEMSphere Academy team. Apply to become a tutor and help transform students' lives.">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://stemsphere.academy/assets/favconsp1.2.png">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      padding: 2rem 1rem;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(255,0,0,0.4);
+    }
+
+    .brand-text {
+      color: #fff;
+      font-size: 1.3em;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .login-link {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95em;
+      box-shadow: 0 4px 12px rgba(0,123,255,0.4);
+      transition: all 0.3s;
+    }
+
+    .login-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,123,255,0.6);
+    }
+
+    .page-title {
+      margin-top: 2rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #f0f0f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,0.9);
+      margin: 1rem auto;
+      max-width: 700px;
+    }
+
+    /* Form Container */
+    .form-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    .application-form {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .form-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #FFD700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(255,215,0,0.3);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    .required {
+      color: #ff0000;
+      margin-left: 0.25rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="number"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #00c6ff;
+      box-shadow: 0 0 0 3px rgba(0,198,255,0.2);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Checkbox Group */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .checkbox-item label {
+      margin: 0;
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    /* Radio Group */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .radio-item input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .radio-item label {
+      margin: 0;
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    /* File Upload */
+    .file-upload {
+      margin-top: 0.5rem;
+    }
+
+    .file-upload input[type="file"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px dashed rgba(255,255,255,0.3);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .file-upload input[type="file"]:hover {
+      border-color: #00c6ff;
+      background: rgba(0,198,255,0.1);
+    }
+
+    .file-note {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .priority-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff0000, #ff6b6b);
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+    .description-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+
+    /* Submit Button */
+    .submit-button {
+      width: 100%;
+      padding: 1.2rem 2rem;
+      background: linear-gradient(135deg, #ff0000, #ff6b6b);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+      margin-top: 2rem;
+    }
+
+    .submit-button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255,0,0,0.7);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      background: rgba(40,167,69,0.2);
+      border: 2px solid #28a745;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message h3 {
+      color: #00ff88;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-message p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Error Message */
+    .error-message {
+      display: none;
+      background: rgba(220,53,69,0.2);
+      border: 2px solid #dc3545;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      margin: 1rem 0;
+      color: #ff6b6b;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .brand {
+        position: static;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .login-link {
+        position: static;
+        display: block;
+        width: fit-content;
+        margin: 1rem auto 0;
+      }
+
+      .page-title {
+        margin-top: 1rem;
+      }
+
+      .application-form {
+        padding: 2rem 1rem;
+      }
+
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="https://learn.stemsphere.academy/assets/favconsp1.2.png" alt="STEMSphere Academy">
+      <span class="brand-text">STEMSphere Academy</span>
+    </div>
+    <a href="https://learn.stemsphere.academy/teacher-login.html" class="login-link">
+      🔓 Teacher Login
+    </a>
+    
+    <h1 class="page-title">Join Our Teaching Team</h1>
+    <p class="page-subtitle">
+      Transform students' lives with your expertise. Apply to become a STEMSphere Academy tutor.
+    </p>
+  </header>
+
+  <div class="form-container">
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+      <h3>✅ Application Submitted Successfully!</h3>
+      <p>Thank you for applying to STEMSphere Academy. We've received your application and will review it carefully.</p>
+      <p>Our team will reach out to you within 3-5 business days via email.</p>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage">
+      <strong>⚠️ Submission Error</strong>
+      <p>There was a problem submitting your application. Please try again or contact us at <a href="mailto:support@stemsphere.academy" style="color: #fff;">support@stemsphere.academy</a></p>
+    </div>
+
+    <form class="application-form" id="teacherApplicationForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+      
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h2 class="section-title">📋 Personal Information</h2>
+        
+        <div class="form-group">
+          <label>Full Name <span class="required">*</span></label>
+          <input type="text" name="fullName" required placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label>Email Address <span class="required">*</span></label>
+          <input type="email" name="email" required placeholder="your.email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label>Country <span class="required">*</span></label>
+          <input type="text" name="country" required placeholder="Enter your country">
+        </div>
+
+        <div class="form-group">
+          <label>Expected Monthly Pay (USD) for Full-Time <span class="required">*</span></label>
+          <input type="number" name="expectedPay" required placeholder="e.g., 3000" min="0" step="100">
+        </div>
+      </div>
+
+      <!-- Teaching Experience -->
+      <div class="form-section">
+        <h2 class="section-title">👨‍🏫 Teaching Experience</h2>
+        
+        <div class="form-group">
+          <label>Which subjects can you teach? <span class="required">*</span></label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="math" name="subjects" value="Math">
+              <label for="math">Math</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="chemistry" name="subjects" value="Chemistry">
+              <label for="chemistry">Chemistry</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="biology" name="subjects" value="Biology">
+              <label for="biology">Biology</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="physics" name="subjects" value="Physics">
+              <label for="physics">Physics</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="python" name="subjects" value="Python Programming">
+              <label for="python">Python Programming</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="sat" name="subjects" value="SAT Math Preparation">
+              <label for="sat">SAT Math Preparation</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="other" name="subjects" value="Other">
+              <label for="other">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" id="otherSubjectGroup" style="display:none;">
+          <label>Please specify other subject(s)</label>
+          <input type="text" name="otherSubject" placeholder="e.g., Economics, History">
+        </div>
+
+        <div class="form-group">
+          <label>How many years of tutoring experience do you have? <span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" id="exp1" name="experience" value="Less than 1 year" required>
+              <label for="exp1">Less than 1 year</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="exp2" name="experience" value="1-3 years">
+              <label for="exp2">1-3 years</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="exp3" name="experience" value="4-6 years">
+              <label for="exp3">4-6 years</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="exp4" name="experience" value="More than 6 years">
+              <label for="exp4">More than 6 years</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications & Qualifications -->
+      <div class="form-section">
+        <h2 class="section-title">📜 Certifications & Qualifications</h2>
+        <p class="description-text">Upload any relevant certifications, degrees, or documents verifying your expertise.</p>
+        
+        <div class="form-group">
+          <label>Upload Certifications (PDF, JPG, PNG - Max 10MB)</label>
+          <div class="file-upload">
+            <input type="file" name="certifications" accept=".pdf,.jpg,.jpeg,.png" multiple>
+          </div>
+          <p class="file-note">You can select multiple files</p>
+        </div>
+      </div>
+
+      <!-- Technology & Internet Readiness -->
+      <div class="form-section">
+        <h2 class="section-title">💻 Technology & Internet Readiness</h2>
+        
+        <div class="form-group">
+          <label>Do you have a computer or tablet suitable for online tutoring? <span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" id="device1" name="device" value="Yes, I have a laptop/desktop computer" required>
+              <label for="device1">Yes, I have a laptop/desktop computer</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="device2" name="device" value="Yes, I have a tablet">
+              <label for="device2">Yes, I have a tablet</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="device3" name="device" value="No, I do not currently have a compatible device">
+              <label for="device3">No, I do not currently have a compatible device</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample Teaching Video -->
+      <div class="form-section">
+        <h2 class="section-title">
+          🎥 Sample Teaching Video Submission
+          <span class="priority-badge">PRIORITY ONBOARDING</span>
+        </h2>
+        <p class="description-text">
+          Upload a 3-minute sample teaching video demonstrating how you teach a STEM concept. Ensure clarity and engagement. (Optional but you get priority onboarding)
+        </p>
+        
+        <div class="form-group">
+          <label>Upload Teaching Video (MP4, MOV, AVI - Max 100MB)</label>
+          <div class="file-upload">
+            <input type="file" name="teachingVideo" accept="video/mp4,video/quicktime,video/x-msvideo">
+          </div>
+          <p class="file-note">Or provide a YouTube/Google Drive link in the "Why Join" section below</p>
+        </div>
+      </div>
+
+      <!-- Final Review & Submission -->
+      <div class="form-section">
+        <h2 class="section-title">✍️ Final Review & Submission</h2>
+        
+        <div class="form-group">
+          <label>Why do you want to tutor at STEMSphere Academy? <span class="required">*</span></label>
+          <p class="description-text">Share your motivation for joining STEMSphere Academy and what you hope to contribute.</p>
+          <textarea name="whyJoin" required placeholder="Tell us about your passion for teaching, your experience, and why STEMSphere Academy is the right fit for you. If you have a video link, include it here."></textarea>
+        </div>
+      </div>
+
+           <button type="submit" class="submit-button" id="submitButton">
+        🚀 Submit Application
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Show/hide "Other Subject" field
+    document.getElementById('other').addEventListener('change', function() {
+      const otherGroup = document.getElementById('otherSubjectGroup');
+      otherGroup.style.display = this.checked ? 'block' : 'none';
+    });
+
+    // Form submission handling
+    const form = document.getElementById('teacherApplicationForm');
+    const submitButton = document.getElementById('submitButton');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Validate at least one subject is selected
+      const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
+      if (checkboxes.length === 0) {
+        alert('Please select at least one subject you can teach.');
+        return;
+      }
+
+      // Disable submit button and show loading
+      submitButton.disabled = true;
+      submitButton.textContent = '⏳ Submitting...';
+      
+      // Hide any previous messages
+      successMessage.classList.remove('show');
+      errorMessage.classList.remove('show');
+
+      try {
+        // Create FormData object
+        const formData = new FormData(form);
+        
+        // Collect all selected subjects into a single field
+        const selectedSubjects = Array.from(checkboxes).map(cb => cb.value);
+        formData.delete('subjects'); // Remove individual checkbox values
+        formData.append('subjects', selectedSubjects.join(', '));
+
+        // Submit to Formspree
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Success!
+          successMessage.classList.add('show');
+          form.style.display = 'none';
+          
+          // Scroll to success message
+          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          
+          // Reset form
+          form.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        errorMessage.classList.add('show');
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } finally {
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = '🚀 Submit Application';
+      }
+    });
+
+    // File upload validation
+    const certInput = document.querySelector('input[name="certifications"]');
+    const videoInput = document.querySelector('input[name="teachingVideo"]');
+
+    if (certInput) {
+      certInput.addEventListener('change', function() {
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        for (let file of this.files) {
+          if (file.size > maxSize) {
+            alert(`File "${file.name}" is too large. Maximum size is 10MB.`);
+            this.value = '';
+            return;
+          }
+        }
+      });
+    }
+
+    if (videoInput) {
+      videoInput.addEventListener('change', function() {
+        const maxSize = 100 * 1024 * 1024; // 100MB
+        if (this.files[0] && this.files[0].size > maxSize) {
+          alert('Video file is too large. Maximum size is 100MB. Consider uploading to YouTube or Google Drive and sharing the link instead.');
+          this.value = '';
+        }
+      });
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer style="background: rgba(0,0,0,0.5); text-align: center; padding: 2rem 1rem; margin-top: 4rem; backdrop-filter: blur(10px);">
+    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">
+      © 2025 STEMSphere Academy. All rights reserved.
+    </p>
+    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 1rem;">
+      Questions? Contact us at <a href="mailto:support@stemsphere.academy" style="color: #00dffc; text-decoration: none;">support@stemsphere.academy</a>
+    </p>
+  </footer>
+</body>
+</html>
