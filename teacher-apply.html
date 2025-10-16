@@ -508,7 +508,7 @@
         </div>
       </div>
 
-      <!-- Teaching Experience -->
+          <!-- Teaching Experience -->
       <div class="form-section">
         <h2 class="section-title">👨‍🏫 Teaching Experience</h2>
         
@@ -815,7 +815,7 @@
         const fullName = document.getElementById('fullName').value;
         const email = document.getElementById('email').value;
         const country = document.getElementById('country').value;
-        const expectedPay = document.getElementById('expectedPay').value;
+        const expectedPay = document.getElementById('expectedPay').value.trim(); // ✅ SAVED AS TEXT - NO CONVERSION
         const otherSubject = document.getElementById('otherSubject').value;
         const experience = document.querySelector('input[name="experience"]:checked').value;
         const device = document.querySelector('input[name="device"]:checked').value;
@@ -855,7 +855,7 @@
           videoUrl = await uploadFile(videoFile, 'videos');
         }
 
-        // ============================================
+                // ============================================
         // SAVE TO DATABASE
         // ============================================
         
@@ -866,7 +866,7 @@
             full_name: fullName,
             email: email,
             country: country,
-            expected_monthly_pay: expectedPay,
+            expected_monthly_pay: expectedPay, // ✅ SAVED AS TEXT
             subjects: selectedSubjects,
             other_subject: otherSubject || null,
             years_of_experience: experience,
