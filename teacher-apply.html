@@ -114,6 +114,17 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
 
+    .required-note {
+      background: rgba(255,215,0,0.15);
+      border-left: 4px solid #FFD700;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      color: #FFD700;
+      font-weight: 600;
+    }
+
     .form-section {
       margin-bottom: 2.5rem;
     }
@@ -457,6 +468,11 @@
 
     <form class="application-form" id="teacherApplicationForm">
       
+      <!-- Required Fields Note -->
+      <div class="required-note">
+        ⚠️ <strong>* = Required field</strong> — Please complete all required fields before submitting.
+      </div>
+
       <!-- Personal Information -->
       <div class="form-section">
         <h2 class="section-title">📋 Personal Information</h2>
@@ -487,7 +503,7 @@
 
         <div class="form-group">
           <label>Expected Monthly Pay for Full-Time <span class="required">*</span></label>
-          <input type="number" name="expectedPay" id="expectedPay" required placeholder="e.g., 3000" min="0" step="100">
+          <input type="text" name="expectedPay" id="expectedPay" required placeholder="e.g., 3000">
           <p class="file-note">Enter amount in your local currency</p>
         </div>
       </div>
@@ -576,7 +592,7 @@
       <div class="form-section">
         <h2 class="section-title">💻 Technology & Internet Readiness</h2>
         
-              <div class="form-group">
+        <div class="form-group">
           <label>Do you have a computer or tablet suitable for online tutoring? <span class="required">*</span></label>
           <div class="radio-group">
             <div class="radio-item">
@@ -799,7 +815,7 @@
         const fullName = document.getElementById('fullName').value;
         const email = document.getElementById('email').value;
         const country = document.getElementById('country').value;
-        const expectedPay = parseFloat(document.getElementById('expectedPay').value);
+        const expectedPay = document.getElementById('expectedPay').value;
         const otherSubject = document.getElementById('otherSubject').value;
         const experience = document.querySelector('input[name="experience"]:checked').value;
         const device = document.querySelector('input[name="device"]:checked').value;
