@@ -1624,62 +1624,66 @@ if (document.readyState === 'loading') {
 setInterval(checkAdvisorAvailability, 5000);
 
 // ==================== LIVE VISITOR TRACKING ====================
-function generateVisitorSessionId() {
-  return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-}
-
-async function trackVisitorPresence() {
-  try {
-    // Get or create session ID
-    let sessionId = localStorage.getItem('visitor_session');
-    if (!sessionId) {
-      sessionId = generateVisitorSessionId();
-      localStorage.setItem('visitor_session', sessionId);
-    }
-
-    // Get location data from free IP API
-    let locationData = { country: 'Unknown', city: 'Unknown', ip: 'Unknown' };
-    try {
-      const response = await fetch('https://ipapi.co/json/');
-      if (response.ok) {
-        locationData = await response.json();
-      }
-    } catch (e) {
-      console.log('Location lookup failed (non-critical):', e);
-    }
-
-    // Track visitor in Supabase
-    await supabaseClient.from('active_visitors').upsert({
-      session_id: sessionId,
-      page_url: window.location.href,
-      country: locationData.country_name || locationData.country || 'Unknown',
-      city: locationData.city || 'Unknown',
-      ip_address: locationData.ip || 'Unknown',
-      last_seen: new Date().toISOString()
-    });
-
-  } catch (error) {
-    console.error('Visitor tracking error (non-critical):', error);
+(async function() {
+  // Generate or get visitor ID
+  let visitorId = localStorage.getItem('visitor_id');
+  if (!visitorId) {
+    visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('visitor_id', visitorId);
   }
-}
 
-// Start tracking immediately
-trackVisitorPresence();
+  async function trackVisitor() {
+    try {
+      // Get location data
+      let locationData = { country: 'Unknown', city: 'Unknown', ip: 'Unknown' };
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (response.ok) {
+          locationData = await response.json();
+        }
+      } catch (e) {
+        console.log('Location lookup failed (non-critical)');
+      }
 
-// Update every 30 seconds to show user is still active
-setInterval(trackVisitorPresence, 30000);
+      const visitorData = {
+        visitor_id: visitorId,
+        page_url: window.location.href,
+        ip_address: locationData.ip || 'Unknown',
+        city: locationData.city || null,
+        country: locationData.country_name || locationData.country || null,
+        last_seen: new Date().toISOString()
+      };
 
-// Track when user leaves (cleanup)
-window.addEventListener('beforeunload', () => {
-  const sessionId = localStorage.getItem('visitor_session');
-  if (sessionId) {
-    // Use sendBeacon for reliable delivery even when page is closing
+      // Upsert visitor data
+      const { error } = await supabaseClient
+        .from('live_visitors')
+        .upsert(visitorData, { 
+          onConflict: 'visitor_id',
+          ignoreDuplicates: false 
+        });
+
+      if (error) {
+        console.error('Visitor tracking error:', error);
+      }
+    } catch (err) {
+      console.error('Tracking failed:', err);
+    }
+  }
+
+  // Track immediately
+  await trackVisitor();
+
+  // Update every 30 seconds
+  setInterval(trackVisitor, 30000);
+
+  // Cleanup on page leave
+  window.addEventListener('beforeunload', () => {
     navigator.sendBeacon(
-      `${SUPABASE_URL}/rest/v1/active_visitors?session_id=eq.${sessionId}`,
+      `${SUPABASE_URL}/rest/v1/live_visitors?visitor_id=eq.${visitorId}`,
       JSON.stringify({ last_seen: new Date().toISOString() })
     );
-  }
-});
+  });
+})();
 
 </script>
 
