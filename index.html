@@ -286,7 +286,7 @@ h2.subtitle {
   padding: 0 1rem;
 }
 
-#highIntentCTA a {
+#highIntentCTA button, #highIntentCTA a {
   display: inline-block;
   background: linear-gradient(135deg, #ff0000, #ff6b6b);
   color: #fff;
@@ -295,15 +295,28 @@ h2.subtitle {
   padding: 1.2rem 2.5rem;
   border-radius: 12px;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   box-shadow: 0 10px 30px rgba(255,0,0,0.5);
   transition: all 0.3s;
   position: relative;
   z-index: 1;
+  margin: 0.5rem;
 }
 
-#highIntentCTA a:hover {
+#highIntentCTA button:hover, #highIntentCTA a:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(255,0,0,0.7);
+}
+
+#liveChatBtn {
+  background: linear-gradient(135deg, #00ff88, #00c853) !important;
+  color: #000 !important;
+  box-shadow: 0 10px 30px rgba(0,255,136,0.5) !important;
+}
+
+#liveChatBtn:hover {
+  box-shadow: 0 15px 40px rgba(0,255,136,0.7) !important;
 }
 
 #highIntentCTA::before {
@@ -328,7 +341,7 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ⭐ REVIEWS SECTION (WHITE TEXT BUTTONS)
+   ⭐ REVIEWS SECTION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #reviews-container {
   background: rgba(255,255,255,0.1);
@@ -367,7 +380,7 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   📚 SUBJECTS SECTION (BLUE HOVER)
+   📚 SUBJECTS SECTION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #tutoring-subjects {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -463,6 +476,72 @@ h2.subtitle {
   color: rgba(255,255,255,0.8);
   font-size: 0.95em;
   line-height: 1.5;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎯 WHY CHOOSE US SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#why-choose {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 4rem 1rem;
+}
+
+#why-choose h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+#why-choose .highlight {
+  color: #00c6ff;
+  font-weight: 700;
+}
+
+#why-choose p {
+  max-width: 800px;
+  margin: 1.5rem auto;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+}
+
+#why-choose ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+#why-choose ul li {
+  position: relative;
+  padding-left: 2.5em;
+  margin: 1rem 0;
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+#why-choose ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ff88;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+#why-choose .stat {
+  text-align: center;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(0,198,255,0.1);
+  border-left: 5px solid #ff0000;
+  border-radius: 8px;
+  max-width: 700px;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -682,72 +761,6 @@ h2.subtitle {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   🎯 WHY CHOOSE US SECTION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-#why-choose {
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  padding: 4rem 1rem;
-}
-
-#why-choose h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #fff;
-}
-
-#why-choose .highlight {
-  color: #00c6ff;
-  font-weight: 700;
-}
-
-#why-choose p {
-  max-width: 800px;
-  margin: 1.5rem auto;
-  line-height: 1.8;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.9);
-  text-align: center;
-}
-
-#why-choose ul {
-  list-style: none;
-  padding: 0;
-  margin: 2rem auto;
-  max-width: 800px;
-}
-
-#why-choose ul li {
-  position: relative;
-  padding-left: 2.5em;
-  margin: 1rem 0;
-  color: rgba(255,255,255,0.9);
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-#why-choose ul li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #00ff88;
-  font-size: 1.5em;
-  font-weight: 700;
-}
-
-#why-choose .stat {
-  text-align: center;
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  margin: 3rem auto;
-  padding: 2rem;
-  background: rgba(0,198,255,0.1);
-  border-left: 5px solid #ff0000;
-  border-radius: 8px;
-  max-width: 700px;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    📝 BLOG SECTION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #blog {
@@ -898,7 +911,6 @@ footer {
    📱 MOBILE RESPONSIVENESS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media (max-width: 768px) {
-  /* Keep brand on left side on mobile */
   .brand {
     position: absolute;
     top: 1rem;
@@ -931,7 +943,6 @@ footer {
     padding: 1.5rem;
   }
 
-  /* Ensure login link doesn't overlap brand */
   .login-link {
     top: 60px;
     font-size: 0.85em;
@@ -965,7 +976,6 @@ footer {
 </head>
 
 <body>
-
 <!-- START: COMPACT LANGUAGE TRANSLATOR BAR -->
 <div id="fallback-translator">
   <select onchange="translatePage(this.value)">
@@ -1036,8 +1046,24 @@ footer {
   </video>
 </div>
 
-<!-- CTA BUTTON (GREEN) -->
+<!-- CTA BUTTON WITH LIVE CHAT -->
 <div id="highIntentCTA">
+  <!-- Live Chat Button (shows when advisor available) - ABOVE RED BUTTON -->
+  <div id="liveChatWrapper" style="display:none; margin-bottom: 1rem;">
+    <button onclick="openAnonymousAdvisorChat()" id="liveChatBtn">
+      💬 Chat with Advisor NOW - Free!
+    </button>
+  </div>
+  
+  <!-- Status Indicator (shows when advisor is online) -->
+  <div id="advisorStatusIndicator" style="display: none; margin: 1rem auto;">
+    <span style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0,255,136,0.2); border: 2px solid #00ff88; border-radius: 8px; color: #fff; font-weight: 600;">
+      <span style="width: 10px; height: 10px; background: #00ff88; border-radius: 50%; animation: pulse 2s infinite;"></span>
+      Advisor Online Now
+    </span>
+  </div>
+  
+  <!-- Regular CTA (always visible) -->
   <a href="https://learn.stemsphere.academy/login.html">
     🚀 Book Your Enrollment Session Now
   </a>
@@ -1073,7 +1099,7 @@ footer {
   const avg = (reviews.reduce((sum, r) => sum + (parseFloat(r[2])||0), 0) / reviews.length).toFixed(1);
   const count = reviews.length;
 
-    const wrapper = document.createElement('div');
+  const wrapper = document.createElement('div');
   wrapper.innerHTML = `
     <div style="margin-bottom:0.8em;">
       <span style="background:#007bff; color:#fff; padding:0.4em 1em; border-radius:20px; font-size:0.95em; font-weight:bold; display:inline-block;">
@@ -1281,7 +1307,6 @@ footer {
       </li>
     </ul>
 
-    <!-- New Flex Schedule Section -->
     <h3 style="color: #00c6ff; text-align: center; font-size: clamp(1.5rem, 4vw, 2rem); margin-top: 2rem; margin-bottom: 0.5rem;">
       Need a smaller flex schedule?
     </h3>
@@ -1290,10 +1315,9 @@ footer {
     </p>
     <ul>
       <li>
-        <span class="highlight">Flex 1-on-1 Private Tutoring (8 Sessions)</span> — $1000 USD per plan
+        <span class="highlight">Flex 1-on-1 Private Tutoring (8 Sessions)</span> — $1100 USD per plan
       </li>
     </ul>
-    <!-- End Flex Schedule Section -->
 
     <p>
       We accept payments in <span class="highlight">most global currencies</span>, including USD, EUR, GBP, NGN, INR, CAD, AUD, JPY, HKD, SGD, PHP, KRW, MYR, THB, TWD, ZAR, BRL, MXN, and more.  
@@ -1309,7 +1333,6 @@ footer {
   </div>
 </section>
 
-
 <!-- EBOOK RESOURCES SECTION -->
 <section id="ebook-resources">
   <h2>📚 Free Learning Resources</h2>
@@ -1319,7 +1342,6 @@ footer {
   </p>
 
   <div class="ebook-grid">
-    <!-- eBook 1 -->
     <div class="ebook-card">
       <div class="free-badge">FREE!</div>
       <img src="https://i.postimg.cc/s24NgxkN/gemini-2-5-flash-image-preview-nano-banana-i-need-an-ebook-cove-2.png" alt="STEM Study System eBook">
@@ -1328,7 +1350,6 @@ footer {
       <a href="https://books.stemsphere.academy" class="ebook-button">Download Free</a>
     </div>
 
-        <!-- eBook 2 -->
     <div class="ebook-card">
       <div class="free-badge">FREE!</div>
       <img src="https://i.postimg.cc/N03SnR7V/ergh.png" alt="College Prep Secrets eBook">
@@ -1451,6 +1472,216 @@ footer {
     312 W 2nd Street #A8380, Casper, WY 82601, USA
   </p>
 </footer>
+
+<!-- 🟢 ANONYMOUS ADVISOR CHAT MODAL (GREEN THEME) -->
+<div id="anonymousAdvisorChatModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;">
+  <div style="background: #fff; border-radius: 16px; width: 90%; max-width: 700px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+    
+    <!-- Header with Customer Service Team Stack (GREEN) -->
+    <div style="background: linear-gradient(135deg, #00ff88, #00c853); color: #000; padding: 1.5rem 2rem; border-radius: 16px 16px 0 0; position: relative;">
+      <button onclick="closeAnonymousChat()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.2); color: #000; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.5em; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">×</button>
+      
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <!-- Stacked Customer Service Team Avatars -->
+        <div style="position: relative; width: 180px; height: 100px;">
+          <img src="https://i.postimg.cc/mrbw5b7S/Tutor1.png" alt="Support Team" style="position: absolute; top: 0; left: 0; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 4;">
+          <img src="https://i.postimg.cc/bvzTBz19/Tutor2.png" alt="Support Team" style="position: absolute; top: 0; left: 40px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 3;">
+          <img src="https://i.postimg.cc/JzgXbMPk/In-Shot-20250221-181740954.jpg" alt="Support Team" style="position: absolute; top: 0; left: 80px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 2;">
+          <img src="https://i.postimg.cc/jjsXFsy6/Tutor3.png" alt="Support Team" style="position: absolute; top: 0; left: 120px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1;">
+        </div>
+        <div style="flex: 1;">
+          <h3 style="margin: 0 0 0.5rem 0; font-size: 1.6em; font-weight: 800;">💬 Live Chat with Our Team</h3>
+          <p style="margin: 0 0 0.5rem 0; font-size: 1.1em; font-weight: 600;">Customer Support Available</p>
+          <p style="margin: 0; font-size: 0.9em; opacity: 0.8;">Our advisors are here to help!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="anonymousChatMessages" style="flex: 1; overflow-y: auto; padding: 1.5rem; background: #f8f9fa; min-height: 300px; max-height: 400px;">
+      <div style="text-align: center; padding: 2rem; color: #999;">
+        <div style="font-size: 3em; margin-bottom: 1rem;">💬</div>
+        <p style="font-size: 1.1em; color: #666;">Login or sign up to start chatting!</p>
+      </div>
+    </div>
+
+    <!-- Input Box -->
+    <div style="padding: 1.5rem; background: #fff; border-top: 2px solid #eee; border-radius: 0 0 16px 16px;">
+      <textarea id="anonymousChatInput" placeholder="Ask about courses, pricing, schedules..." style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1em; font-family: inherit; resize: vertical; min-height: 80px; margin-bottom: 1rem; background: #f5f5f5; color: #999; cursor: not-allowed;" disabled readonly></textarea>
+      <button onclick="redirectToLogin()" style="width: 100%; background: linear-gradient(135deg, #007bff, #0056b3); color: #fff; padding: 1rem; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 700; cursor: pointer; transition: all 0.3s;">
+        🔓 Login/Signup to Chat with Advisor
+      </button>
+      <p style="margin: 1rem 0 0 0; text-align: center; color: #666; font-size: 0.9em;">
+        💡 Create a free account to start chatting instantly!
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SUPABASE & CHAT JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// Supabase setup
+const SUPABASE_URL = 'https://horqtcwnhwgodwlyqhli.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvcnF0Y3duaHdnb2R3bHlxaGxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NjAyNzEsImV4cCI6MjA3NTMzNjI3MX0.4rYzW6MFEkVVqLor55RuFGLwE6WBJrYLxvYbgeXXRGU';
+
+const { createClient } = supabase;
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentAdvisorId = null;
+let currentAdvisorData = null;
+
+// Check if advisors are available - RUNS IMMEDIATELY ON PAGE LOAD
+async function checkAdvisorAvailability() {
+  try {
+    const { data: advisors, error } = await supabaseClient
+      .from('profiles')
+      .select('id, full_name, profile_photo_url, bio, years_experience, education, fun_fact, teaching_video_url')
+      .eq('role', 'teacher')
+      .eq('is_advisor', true)
+      .eq('advisor_available', true)
+      .limit(1);
+
+    if (error) {
+      console.error('Error fetching advisors:', error);
+      return;
+    }
+
+    const chatWrapper = document.getElementById('liveChatWrapper');
+    const statusIndicator = document.getElementById('advisorStatusIndicator');
+    
+    if (advisors && advisors.length > 0) {
+      currentAdvisorData = advisors[0];
+      if (chatWrapper) {
+        chatWrapper.style.display = 'block';
+      }
+      if (statusIndicator) {
+        statusIndicator.style.display = 'block';
+      }
+    } else {
+      if (chatWrapper) {
+        chatWrapper.style.display = 'none';
+      }
+      if (statusIndicator) {
+        statusIndicator.style.display = 'none';
+      }
+    }
+  } catch (err) {
+    console.error('Exception in checkAdvisorAvailability:', err);
+  }
+}
+
+// Open anonymous chat modal
+async function openAnonymousAdvisorChat() {
+  const { data: advisors } = await supabaseClient
+    .from('profiles')
+    .select('id, full_name, profile_photo_url, bio, years_experience, education, fun_fact, teaching_video_url')
+    .eq('role', 'teacher')
+    .eq('is_advisor', true)
+    .eq('advisor_available', true)
+    .limit(1);
+
+  if (!advisors || advisors.length === 0) {
+    alert('⚠️ No advisors available right now. Please sign up or try again later!\n\nCreate an account: ' + window.location.origin + '/login.html');
+    return;
+  }
+
+  currentAdvisorId = advisors[0].id;
+  currentAdvisorData = advisors[0];
+  
+  // Show the modal
+  document.getElementById('anonymousAdvisorChatModal').style.display = 'flex';
+  
+  // Show login prompt in messages area
+  const container = document.getElementById('anonymousChatMessages');
+  container.innerHTML = `
+    <div style="text-align: center; padding: 2rem; color: #999;">
+      <div style="font-size: 3em; margin-bottom: 1rem;">💬</div>
+      <p style="font-size: 1.1em; color: #666;">Login or sign up to start chatting with our team!</p>
+    </div>
+  `;
+}
+
+// Redirect to login page when user tries to send message
+function redirectToLogin() {
+  window.location.href = 'https://learn.stemsphere.academy/login.html';
+}
+
+// Close anonymous chat
+function closeAnonymousChat() {
+  document.getElementById('anonymousAdvisorChatModal').style.display = 'none';
+}
+
+// 🚀 CRITICAL: Run immediately when page loads (not waiting for DOMContentLoaded)
+checkAdvisorAvailability();
+
+// Also check when DOM is ready (backup)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', checkAdvisorAvailability);
+}
+
+// Check every 5 seconds for fast updates
+setInterval(checkAdvisorAvailability, 5000);
+
+// ==================== LIVE VISITOR TRACKING ====================
+function generateVisitorSessionId() {
+  return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+async function trackVisitorPresence() {
+  try {
+    // Get or create session ID
+    let sessionId = localStorage.getItem('visitor_session');
+    if (!sessionId) {
+      sessionId = generateVisitorSessionId();
+      localStorage.setItem('visitor_session', sessionId);
+    }
+
+    // Get location data from free IP API
+    let locationData = { country: 'Unknown', city: 'Unknown', ip: 'Unknown' };
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      if (response.ok) {
+        locationData = await response.json();
+      }
+    } catch (e) {
+      console.log('Location lookup failed (non-critical):', e);
+    }
+
+    // Track visitor in Supabase
+    await supabaseClient.from('active_visitors').upsert({
+      session_id: sessionId,
+      page_url: window.location.href,
+      country: locationData.country_name || locationData.country || 'Unknown',
+      city: locationData.city || 'Unknown',
+      ip_address: locationData.ip || 'Unknown',
+      last_seen: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Visitor tracking error (non-critical):', error);
+  }
+}
+
+// Start tracking immediately
+trackVisitorPresence();
+
+// Update every 30 seconds to show user is still active
+setInterval(trackVisitorPresence, 30000);
+
+// Track when user leaves (cleanup)
+window.addEventListener('beforeunload', () => {
+  const sessionId = localStorage.getItem('visitor_session');
+  if (sessionId) {
+    // Use sendBeacon for reliable delivery even when page is closing
+    navigator.sendBeacon(
+      `${SUPABASE_URL}/rest/v1/active_visitors?session_id=eq.${sessionId}`,
+      JSON.stringify({ last_seen: new Date().toISOString() })
+    );
+  }
+});
+
+</script>
 
 </body>
 </html>
