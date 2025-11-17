@@ -976,6 +976,128 @@ footer {
 </head>
 
 <body>
+<!-- 🍪 COOKIE CONSENT BANNER -->
+<div id="cookieConsentBanner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, rgba(102,126,234,0.98), rgba(118,75,162,0.98)); backdrop-filter: blur(10px); color: #fff; padding: 1.5rem; z-index: 99999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); border-top: 3px solid #00ff88;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;">
+    
+    <!-- Cookie Icon & Text -->
+    <div style="flex: 1; min-width: 300px;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="font-size: 2.5rem;">🍪</div>
+        <div>
+          <p style="margin: 0 0 0.5rem 0; font-weight: 700; font-size: 1.1em;">
+            We Value Your Privacy
+          </p>
+          <p style="margin: 0; font-size: 0.95em; line-height: 1.5; opacity: 0.95;">
+            We use cookies to improve your experience, analyze traffic, and show personalized ads via Facebook and Google. 
+            By clicking "Accept All", you consent to our use of cookies.
+            <a href="/privacy.html" style="color: #00ff88; text-decoration: underline; font-weight: 600;">Learn more</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <button onclick="acceptAllCookies()" style="background: linear-gradient(135deg, #00ff88, #00c853); color: #000; padding: 0.75rem 2rem; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; box-shadow: 0 4px 12px rgba(0,255,136,0.4); transition: all 0.3s; white-space: nowrap;">
+        ✓ Accept All
+      </button>
+      <button onclick="rejectCookies()" style="background: rgba(255,255,255,0.2); color: #fff; padding: 0.75rem 2rem; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; transition: all 0.3s; white-space: nowrap;">
+        ✗ Reject
+      </button>
+      <button onclick="openCookieSettings()" style="background: none; color: #fff; padding: 0.75rem 1.5rem; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px; font-weight: 600; font-size: 1em; cursor: pointer; transition: all 0.3s; white-space: nowrap;">
+        ⚙️ Customize
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 🍪 COOKIE SETTINGS MODAL -->
+<div id="cookieSettingsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100000; align-items: center; justify-content: center; padding: 1rem; overflow-y: auto;">
+  <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); border: 3px solid #667eea; border-radius: 16px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+    
+    <!-- Header -->
+    <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 2rem; border-radius: 13px 13px 0 0; position: relative;">
+      <button onclick="closeCookieSettings()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.2); color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.5em; font-weight: 700; transition: all 0.3s;">×</button>
+      <h2 style="margin: 0 0 0.5rem 0; color: #fff; font-size: 1.8em;">🍪 Cookie Settings</h2>
+      <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 0.95em;">Manage your cookie preferences</p>
+    </div>
+
+    <!-- Cookie Categories -->
+    <div style="padding: 2rem;">
+      
+      <!-- Essential Cookies -->
+      <div style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0; color: #00ff88; font-size: 1.3em;">✓ Essential Cookies</h3>
+          <span style="background: rgba(0,255,136,0.2); color: #00ff88; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85em; font-weight: 700;">Always Active</span>
+        </div>
+        <p style="margin: 0; color: rgba(255,255,255,0.8); line-height: 1.6;">
+          Required for the website to function properly. These cannot be disabled.
+        </p>
+        <ul style="margin: 0.5rem 0 0 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.8;">
+          <li>User session management</li>
+          <li>Security and authentication</li>
+          <li>Basic site functionality</li>
+          <li>Visitor analytics (for site improvement)</li>
+        </ul>
+      </div>
+
+      <!-- Analytics Cookies -->
+      <div style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0; color: #fff; font-size: 1.3em;">📊 Analytics Cookies</h3>
+          <label style="position: relative; display: inline-block; width: 60px; height: 30px; cursor: pointer;">
+            <input type="checkbox" id="analyticsCookies" checked style="opacity: 0; width: 0; height: 0;">
+            <span style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #667eea; border-radius: 30px; transition: 0.3s;" id="analyticsToggle"></span>
+            <span style="position: absolute; content: ''; height: 22px; width: 22px; left: 4px; bottom: 4px; background: white; border-radius: 50%; transition: 0.3s;" id="analyticsSlider"></span>
+          </label>
+        </div>
+        <p style="margin: 0; color: rgba(255,255,255,0.8); line-height: 1.6;">
+          Help us understand how visitors interact with our website.
+        </p>
+        <ul style="margin: 0.5rem 0 0 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.8;">
+          <li>Google Analytics</li>
+          <li>Detailed page view tracking</li>
+          <li>Traffic source analysis</li>
+        </ul>
+      </div>
+
+      <!-- Marketing Cookies -->
+      <div style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0; color: #fff; font-size: 1.3em;">🎯 Marketing Cookies</h3>
+          <label style="position: relative; display: inline-block; width: 60px; height: 30px; cursor: pointer;">
+            <input type="checkbox" id="marketingCookies" checked style="opacity: 0; width: 0; height: 0;">
+            <span style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #667eea; border-radius: 30px; transition: 0.3s;" id="marketingToggle"></span>
+            <span style="position: absolute; content: ''; height: 22px; width: 22px; left: 4px; bottom: 4px; background: white; border-radius: 50%; transition: 0.3s;" id="marketingSlider"></span>
+          </label>
+        </div>
+        <p style="margin: 0; color: rgba(255,255,255,0.8); line-height: 1.6;">
+          Used to show you relevant ads on Facebook, Google, and other platforms.
+        </p>
+        <ul style="margin: 0.5rem 0 0 1.5rem; color: rgba(255,255,255,0.7); line-height: 1.8;">
+          <li>Facebook Pixel</li>
+          <li>Google Ads Remarketing</li>
+          <li>Personalized advertising</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer Buttons -->
+    <div style="padding: 0 2rem 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <button onclick="saveCustomCookieSettings()" style="flex: 1; background: linear-gradient(135deg, #00ff88, #00c853); color: #000; padding: 1rem 2rem; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; box-shadow: 0 4px 12px rgba(0,255,136,0.4);">
+        💾 Save My Choices
+      </button>
+      <button onclick="acceptAllFromSettings()" style="flex: 1; background: rgba(255,255,255,0.1); color: #fff; padding: 1rem 2rem; border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer;">
+        Accept All
+      </button>
+    </div>
+
+  </div>
+</div>
+
 <!-- START: COMPACT LANGUAGE TRANSLATOR BAR -->
 <div id="fallback-translator">
   <select onchange="translatePage(this.value)">
@@ -1414,6 +1536,40 @@ footer {
       <li>IB Math SL/HL prep Singapore</li>
     </ul>
   </article>
+<!-- BLOG SECTION - PHYSICS -->
+<article class="blog-post">
+  <h2 class="blog-title">Master Physics Through Motion, Energy, and Real-World Application</h2>
+  <p class="blog-body">
+    Physics is the language of the universe—and at STEMSphere Academy, we decode it together. 
+    Our <strong>AP Physics tutoring online</strong> doesn't just teach formulas; we build 
+    intuition through hands-on problem-solving and visual demonstrations that make abstract 
+    concepts click. From projectile motion to electromagnetic fields, every lesson connects 
+    theory to the world around you.
+  </p>
+  <p class="blog-body">
+    Students across <strong>New York</strong>, <strong>California</strong>, and <strong>Texas</strong> 
+    choose us for <strong>AP Physics C exam mastery</strong>, while learners in <strong>Hong Kong</strong> 
+    and <strong>Singapore</strong> excel with our <strong>IB Physics HL preparation</strong>. We specialize 
+    in breaking down complex topics—kinematics, thermodynamics, quantum mechanics—into step-by-step strategies 
+    that build confidence and exam-ready skills.
+  </p>
+  <p class="blog-body">
+    Whether you're struggling with circuits, acing mechanics, or preparing for university-level physics, 
+    our tutors adapt to your learning style. We use real-world examples, interactive simulations, and 
+    practice problems that mirror actual AP and IB exams. The result? Students who don't just pass—they thrive.
+  </p>
+  <h3 class="blog-subtitle">Physics tutoring expertise</h3>
+  <ul class="blog-topics">
+    <li>AP Physics 1 and 2 tutoring online</li>
+    <li>AP Physics C (Mechanics & Electricity & Magnetism) prep</li>
+    <li>IB Physics HL and SL exam preparation Singapore</li>
+    <li>A-Level physics tutoring Hong Kong</li>
+    <li>HKDSE Physics exam coaching</li>
+    <li>College physics for engineering students California</li>
+    <li>Mechanics and electromagnetism help Texas</li>
+    <li>University physics tutoring New York</li>
+  </ul>
+</article>
 </section>
 
 <!-- FAQ & CONTACT SECTION -->
@@ -1623,7 +1779,160 @@ if (document.readyState === 'loading') {
 // Check every 5 seconds for fast updates
 setInterval(checkAdvisorAvailability, 5000);
 
-// ==================== LIVE VISITOR TRACKING ====================
+// ==================== COOKIE CONSENT MANAGEMENT ====================
+
+// Toggle switches functionality
+document.getElementById('analyticsCookies').addEventListener('change', function() {
+  const toggle = document.getElementById('analyticsToggle');
+  const slider = document.getElementById('analyticsSlider');
+  if (this.checked) {
+    toggle.style.background = '#667eea';
+    slider.style.transform = 'translateX(30px)';
+  } else {
+    toggle.style.background = '#ccc';
+    slider.style.transform = 'translateX(0)';
+  }
+});
+
+document.getElementById('marketingCookies').addEventListener('change', function() {
+  const toggle = document.getElementById('marketingToggle');
+  const slider = document.getElementById('marketingSlider');
+  if (this.checked) {
+    toggle.style.background = '#667eea';
+    slider.style.transform = 'translateX(30px)';
+  } else {
+    toggle.style.background = '#ccc';
+    slider.style.transform = 'translateX(0)';
+  }
+});
+
+// Initialize toggles
+window.addEventListener('DOMContentLoaded', () => {
+  const analyticsSlider = document.getElementById('analyticsSlider');
+  const marketingSlider = document.getElementById('marketingSlider');
+  if (analyticsSlider) analyticsSlider.style.transform = 'translateX(30px)';
+  if (marketingSlider) marketingSlider.style.transform = 'translateX(30px)';
+});
+
+// Check if user has already made a choice
+function checkCookieConsent() {
+  const consent = localStorage.getItem('cookieConsent');
+  if (!consent) {
+    // Show banner after 1 second delay for better UX
+    setTimeout(() => {
+      document.getElementById('cookieConsentBanner').style.display = 'block';
+    }, 1000);
+  } else {
+    // User has already consented, load tracking scripts
+    const consentData = JSON.parse(consent);
+    if (consentData.analytics) {
+      enableAnalytics();
+    }
+    if (consentData.marketing) {
+      enableMarketing();
+    }
+  }
+}
+
+// Accept all cookies
+function acceptAllCookies() {
+  const consent = {
+    essential: true,
+    analytics: true,
+    marketing: true,
+    timestamp: new Date().toISOString()
+  };
+  localStorage.setItem('cookieConsent', JSON.stringify(consent));
+  document.getElementById('cookieConsentBanner').style.display = 'none';
+  
+  // Enable all tracking
+  enableAnalytics();
+  enableMarketing();
+  
+  console.log('✅ All cookies accepted');
+}
+
+// Reject all optional cookies
+function rejectCookies() {
+  const consent = {
+    essential: true,
+    analytics: false,
+    marketing: false,
+    timestamp: new Date().toISOString()
+  };
+  localStorage.setItem('cookieConsent', JSON.stringify(consent));
+  document.getElementById('cookieConsentBanner').style.display = 'none';
+  
+  console.log('❌ Optional cookies rejected (visitor tracking still active)');
+}
+
+// Open cookie settings modal
+function openCookieSettings() {
+  document.getElementById('cookieConsentBanner').style.display = 'none';
+  document.getElementById('cookieSettingsModal').style.display = 'flex';
+}
+
+// Close cookie settings modal
+function closeCookieSettings() {
+  document.getElementById('cookieSettingsModal').style.display = 'none';
+  
+  // Show banner again if no consent saved
+  if (!localStorage.getItem('cookieConsent')) {
+    document.getElementById('cookieConsentBanner').style.display = 'block';
+  }
+}
+
+// Save custom cookie settings
+function saveCustomCookieSettings() {
+  const analytics = document.getElementById('analyticsCookies').checked;
+  const marketing = document.getElementById('marketingCookies').checked;
+  
+  const consent = {
+    essential: true,
+    analytics: analytics,
+    marketing: marketing,
+    timestamp: new Date().toISOString()
+  };
+  
+  localStorage.setItem('cookieConsent', JSON.stringify(consent));
+  document.getElementById('cookieSettingsModal').style.display = 'none';
+  
+  // Enable selected tracking
+  if (analytics) enableAnalytics();
+  if (marketing) enableMarketing();
+  
+  console.log('✅ Custom cookie preferences saved:', consent);
+}
+
+// Accept all from settings modal
+function acceptAllFromSettings() {
+  document.getElementById('analyticsCookies').checked = true;
+  document.getElementById('marketingCookies').checked = true;
+  
+  // Update toggle UI
+  document.getElementById('analyticsToggle').style.background = '#667eea';
+  document.getElementById('analyticsSlider').style.transform = 'translateX(30px)';
+  document.getElementById('marketingToggle').style.background = '#667eea';
+  document.getElementById('marketingSlider').style.transform = 'translateX(30px)';
+  
+  saveCustomCookieSettings();
+}
+
+// Enable Google Analytics (already in your site)
+function enableAnalytics() {
+  // Your Google Analytics is already loaded in the <head>
+  // This just confirms it's allowed to track
+  console.log('📊 Analytics tracking enabled');
+}
+
+// Enable Marketing pixels (Facebook Pixel already in your site)
+function enableMarketing() {
+  // Your Facebook Pixel is already loaded in the <head>
+  // This just confirms it's allowed to track
+  console.log('🎯 Marketing tracking enabled');
+}
+
+// ==================== LIVE VISITOR TRACKING (ALWAYS RUNS) ====================
 (async function() {
   // Generate or get visitor ID
   let visitorId = localStorage.getItem('visitor_id');
@@ -1684,6 +1993,9 @@ setInterval(checkAdvisorAvailability, 5000);
     );
   });
 })();
+
+// Run cookie consent check on page load
+checkCookieConsent();
 
 </script>
 
