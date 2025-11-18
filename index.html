@@ -44,7 +44,7 @@
   }
   </script>
 <!-- Meta Pixel Code -->
-<script>
+<script defer>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -976,12 +976,12 @@ footer {
 </head>
 
 <body>
-<!-- 🍪 COOKIE CONSENT BANNER - 50% SMALLER -->
+<!-- 🍪 COOKIE CONSENT BANNER - DESKTOP: Normal | MOBILE: Thin Bar -->
 <div id="cookieConsentBanner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, rgba(102,126,234,0.98), rgba(118,75,162,0.98)); backdrop-filter: blur(10px); color: #fff; padding: 0.75rem; z-index: 99999; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); border-top: 2px solid #00ff88;">
   <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
     
     <!-- Cookie Icon & Text -->
-    <div style="flex: 1; min-width: 250px;">
+    <div style="flex: 1; min-width: 250px;" id="cookieFullText">
       <div style="display: flex; align-items: center; gap: 0.5rem;">
         <div style="font-size: 1.5rem;">🍪</div>
         <div>
@@ -996,16 +996,24 @@ footer {
       </div>
     </div>
 
+    <!-- MOBILE ONLY: Thin bar text (hidden on desktop) -->
+    <div style="flex: 1; display: none;" id="cookieMobileText">
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85em;">
+        <span>🍪</span>
+        <span style="font-weight: 600;">We use cookies</span>
+      </div>
+    </div>
+
     <!-- Buttons -->
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="cookieButtons">
       <button onclick="acceptAllCookies()" style="background: linear-gradient(135deg, #00ff88, #00c853); color: #000; padding: 0.5rem 1.25rem; border: none; border-radius: 6px; font-weight: 700; font-size: 0.8em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,255,136,0.4); transition: all 0.3s; white-space: nowrap;">
-        ✓ Accept All
+        ✓ Accept
       </button>
       <button onclick="rejectCookies()" style="background: rgba(255,255,255,0.2); color: #fff; padding: 0.5rem 1.25rem; border: 1px solid rgba(255,255,255,0.5); border-radius: 6px; font-weight: 700; font-size: 0.8em; cursor: pointer; transition: all 0.3s; white-space: nowrap;">
         ✗ Reject
       </button>
       <button onclick="openCookieSettings()" style="background: none; color: #fff; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.5); border-radius: 6px; font-weight: 600; font-size: 0.8em; cursor: pointer; transition: all 0.3s; white-space: nowrap;">
-        ⚙️ Customize
+        ⚙️ More
       </button>
     </div>
   </div>
@@ -1158,9 +1166,9 @@ footer {
   </div>
 </header>
 
-<!-- BANNER VIDEO -->
+<!-- BANNER VIDEO - OPTIMIZED WITH PRELOAD -->
 <div class="banner-video">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline preload="auto" poster="https://learn.stemsphere.academy/assets/SSTEMSphereAcademybanner.png">
     <source src="https://learn.stemsphere.academy/assets/StemspherebannerVid29S3pt.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
@@ -1192,30 +1200,68 @@ footer {
 <!-- REVIEWS SECTION -->
 <div id="reviews-container"></div>
 <script>
+// ⚡ OPTIMIZED: Cache reviews for 24 hours
 (async () => {
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRSWqhCcu_XZW7SW5uZ3UZdKzvLm2zNw8DvMZV2TD_gcts6K-DBrLwd88pnXVn0xl0fxRRfGW0Y4iyN/pub?output=csv';
-  const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSd0lD5dU8nsUbBzfqqRkLflTkJVrAQyvZXI81uXXyOPXpoUdA/viewform?usp=header';
-
-  const res = await fetch(csvUrl);
-  const text = await res.text();
-  const rows = text.trim().split('\n').slice(1).map(r =>
-    r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, ''))
-  );
-
-  const reviews = rows
-    .filter(r => {
-      const name = (r[0] || "").toLowerCase();
-      const textVal = (r[1] || "").toLowerCase();
-      return (
-        r[2] &&
-        !name.includes("facebook") &&
-        !textVal.includes("facebook")
+  const CACHE_KEY = 'stemsphere_reviews_cache';
+  const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  
+  // Check if we have cached reviews
+  const cachedData = localStorage.getItem(CACHE_KEY);
+  let reviews = [];
+  
+  if (cachedData) {
+    try {
+      const parsed = JSON.parse(cachedData);
+      const now = new Date().getTime();
+      
+      // If cache is still valid (less than 24 hours old)
+      if (now - parsed.timestamp < CACHE_DURATION) {
+        reviews = parsed.reviews;
+        console.log('✅ Using cached reviews');
+      }
+    } catch (e) {
+      console.log('Cache parse error, will fetch fresh data');
+    }
+  }
+  
+  // If no valid cache, fetch fresh data
+  if (reviews.length === 0) {
+    try {
+      const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRSWqhCcu_XZW7SW5uZ3UZdKzvLm2zNw8DvMZV2TD_gcts6K-DBrLwd88pnXVn0xl0fxRRfGW0Y4iyN/pub?output=csv';
+      const res = await fetch(csvUrl);
+      const text = await res.text();
+      const rows = text.trim().split('\n').slice(1).map(r =>
+        r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, ''))
       );
-    })
-    .sort((a, b) => new Date(b[3]) - new Date(a[3]));
+
+      reviews = rows
+        .filter(r => {
+          const name = (r[0] || "").toLowerCase();
+          const textVal = (r[1] || "").toLowerCase();
+          return (
+            r[2] &&
+            !name.includes("facebook") &&
+            !textVal.includes("facebook")
+          );
+        })
+        .sort((a, b) => new Date(b[3]) - new Date(a[3]));
+      
+      // Cache the reviews
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        timestamp: new Date().getTime(),
+        reviews: reviews
+      }));
+      
+      console.log('✅ Fetched and cached fresh reviews');
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      return;
+    }
+  }
 
   if (!reviews.length) return;
 
+  const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSd0lD5dU8nsUbBzfqqRkLflTkJVrAQyvZXI81uXXyOPXpoUdA/viewform?usp=header';
   const avg = (reviews.reduce((sum, r) => sum + (parseFloat(r[2])||0), 0) / reviews.length).toFixed(1);
   const count = reviews.length;
 
@@ -1307,66 +1353,67 @@ footer {
     src="https://i.postimg.cc/mkZDYz4T/Ads-11.png"
     alt="Tutoring Banner"
     class="tutoring-banner"
+    loading="lazy"
   />
 
   <div class="tutor-grid">
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/43xqCpgD/9104950.png" alt="Public Speaking Icon" />
+      <img src="https://i.postimg.cc/43xqCpgD/9104950.png" alt="Public Speaking Icon" loading="lazy" />
       <h4>Public Speaking Foundations</h4>
       <p class="tutor-desc">Enhance your confidence and clarity.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/PxKCCzDt/Screenshot-2025-08-28-191534.png" alt="Algebra Essentials Icon" />
+      <img src="https://i.postimg.cc/PxKCCzDt/Screenshot-2025-08-28-191534.png" alt="Algebra Essentials Icon" loading="lazy" />
       <h4>Algebra Essentials</h4>
       <p class="tutor-desc">From linear equations to polynomials.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/xCjCVJ4B/2792361.png" alt="Geometry Foundations Icon" />
+      <img src="https://i.postimg.cc/xCjCVJ4B/2792361.png" alt="Geometry Foundations Icon" loading="lazy" />
       <h4>Geometry Foundations</h4>
       <p class="tutor-desc">Master shapes, angles, and proofs.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/VvpLt7kc/Screenshot-2025-08-28-192149.png" alt="Pre-Calculus & Trig Icon" />
+      <img src="https://i.postimg.cc/VvpLt7kc/Screenshot-2025-08-28-192149.png" alt="Pre-Calculus & Trig Icon" loading="lazy" />
       <h4>Pre-Calculus &amp; Trigonometry</h4>
       <p class="tutor-desc">Functions, limits, and trig insights.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/mDhsSQqZ/Screenshot-2025-08-28-191639.png" alt="AP Calculus AB & BC Icon" />
+      <img src="https://i.postimg.cc/mDhsSQqZ/Screenshot-2025-08-28-191639.png" alt="AP Calculus AB & BC Icon" loading="lazy" />
       <h4>AP® Calculus AB &amp; BC</h4>
       <p class="tutor-desc">Intensive prep for derivatives and integrals.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/MGH6s2f8/5932783.png" alt="AP Statistics Icon" />
+      <img src="https://i.postimg.cc/MGH6s2f8/5932783.png" alt="AP Statistics Icon" loading="lazy" />
       <h4>AP® Statistics</h4>
       <p class="tutor-desc">Data analysis and probability fundamentals.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/dVtw1PBT/test-tube-and-chemical-compound-chemistry-colored-icon-vector.jpg" alt="General Chemistry Icon" />
+      <img src="https://i.postimg.cc/dVtw1PBT/test-tube-and-chemical-compound-chemistry-colored-icon-vector.jpg" alt="General Chemistry Icon" loading="lazy" />
       <h4>General Chemistry Crash Course</h4>
       <p class="tutor-desc">Core concepts in atoms and reactions.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/FHdhttVb/Screenshot-2025-08-28-193154.png" alt="Organic Chemistry Icon" />
+      <img src="https://i.postimg.cc/FHdhttVb/Screenshot-2025-08-28-193154.png" alt="Organic Chemistry Icon" loading="lazy" />
       <h4>Organic Chemistry Deep Dive</h4>
       <p class="tutor-desc">Mechanisms and organic compound synthesis.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/xCR2G99Q/images-1.jpg" alt="IB Chemistry SL & HL Icon" />
+      <img src="https://i.postimg.cc/xCR2G99Q/images-1.jpg" alt="IB Chemistry SL & HL Icon" loading="lazy" />
       <h4>IB Chemistry SL &amp; HL Prep</h4>
       <p class="tutor-desc">Curriculum-focused chemistry strategies.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/RFPYVhMW/Screenshot-2025-08-28-193929.png" alt="Biology Masterclass Icon" />
+      <img src="https://i.postimg.cc/RFPYVhMW/Screenshot-2025-08-28-193929.png" alt="Biology Masterclass Icon" loading="lazy" />
       <h4>Biology Masterclass</h4>
       <p class="tutor-desc">Dive into cell biology and genetics.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/FHVXX9JL/Screenshot-2025-08-28-194223.png" alt="MCAT Biology Review Icon" />
+      <img src="https://i.postimg.cc/FHVXX9JL/Screenshot-2025-08-28-194223.png" alt="MCAT Biology Review Icon" loading="lazy" />
       <h4>MCAT Biology Review</h4>
       <p class="tutor-desc">High-yield biology for MCAT success.</p>
     </div>
     <div class="tutor-subject">
-      <img src="https://i.postimg.cc/ZRyfZcDM/Screenshot-2025-08-28-195306.png" alt="English Mastery Icon" />
+      <img src="https://i.postimg.cc/ZRyfZcDM/Screenshot-2025-08-28-195306.png" alt="English Mastery Icon" loading="lazy" />
       <h4>English Mastery</h4>
       <p class="tutor-desc">Improve reading, writing, and speaking.</p>
     </div>
@@ -1447,7 +1494,7 @@ footer {
     <div class="conversion-box">
       <div id="oanda_ecc">
         <span>Currency Converter by OANDA</span>
-        <script src="https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en"></script>
+        <script defer src="https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en"></script>
       </div>
     </div>
   </div>
@@ -1464,7 +1511,7 @@ footer {
   <div class="ebook-grid">
     <div class="ebook-card">
       <div class="free-badge">FREE!</div>
-      <img src="https://i.postimg.cc/s24NgxkN/gemini-2-5-flash-image-preview-nano-banana-i-need-an-ebook-cove-2.png" alt="STEM Study System eBook">
+      <img src="https://i.postimg.cc/s24NgxkN/gemini-2-5-flash-image-preview-nano-banana-i-need-an-ebook-cove-2.png" alt="STEM Study System eBook" loading="lazy">
       <h3>The STEM Student's Secret Study System</h3>
       <p>Master math and science with proven techniques from top students. Learn the 3-step formula for acing exams.</p>
       <a href="https://books.stemsphere.academy" class="ebook-button">Download Free</a>
@@ -1472,7 +1519,7 @@ footer {
 
     <div class="ebook-card">
       <div class="free-badge">FREE!</div>
-      <img src="https://i.postimg.cc/N03SnR7V/ergh.png" alt="College Prep Secrets eBook">
+      <img src="https://i.postimg.cc/N03SnR7V/ergh.png" alt="College Prep Secrets eBook" loading="lazy">
       <h3>College Prep Secrets for Parents</h3>
       <p>The insider's guide to preparing your teen for college. Learn what schools don't tell you about admissions and scholarships.</p>
       <a href="https://books.stemsphere.academy" class="ebook-button">Download Free</a>
@@ -1534,40 +1581,40 @@ footer {
       <li>IB Math SL/HL prep Singapore</li>
     </ul>
   </article>
-<!-- BLOG SECTION - PHYSICS -->
-<article class="blog-post">
-  <h2 class="blog-title">Master Physics Through Motion, Energy, and Real-World Application</h2>
-  <p class="blog-body">
-    Physics is the language of the universe—and at STEMSphere Academy, we decode it together. 
-    Our <strong>AP Physics tutoring online</strong> doesn't just teach formulas; we build 
-    intuition through hands-on problem-solving and visual demonstrations that make abstract 
-    concepts click. From projectile motion to electromagnetic fields, every lesson connects 
-    theory to the world around you.
-  </p>
-  <p class="blog-body">
-    Students across <strong>New York</strong>, <strong>California</strong>, and <strong>Texas</strong> 
-    choose us for <strong>AP Physics C exam mastery</strong>, while learners in <strong>Hong Kong</strong> 
-    and <strong>Singapore</strong> excel with our <strong>IB Physics HL preparation</strong>. We specialize 
-    in breaking down complex topics—kinematics, thermodynamics, quantum mechanics—into step-by-step strategies 
-    that build confidence and exam-ready skills.
-  </p>
-  <p class="blog-body">
-    Whether you're struggling with circuits, acing mechanics, or preparing for university-level physics, 
-    our tutors adapt to your learning style. We use real-world examples, interactive simulations, and 
-    practice problems that mirror actual AP and IB exams. The result? Students who don't just pass—they thrive.
-  </p>
-  <h3 class="blog-subtitle">Physics tutoring expertise</h3>
-  <ul class="blog-topics">
-    <li>AP Physics 1 and 2 tutoring online</li>
-    <li>AP Physics C (Mechanics & Electricity & Magnetism) prep</li>
-    <li>IB Physics HL and SL exam preparation Singapore</li>
-    <li>A-Level physics tutoring Hong Kong</li>
-    <li>HKDSE Physics exam coaching</li>
-    <li>College physics for engineering students California</li>
-    <li>Mechanics and electromagnetism help Texas</li>
-    <li>University physics tutoring New York</li>
-  </ul>
-</article>
+
+  <article class="blog-post">
+    <h2 class="blog-title">Master Physics Through Motion, Energy, and Real-World Application</h2>
+    <p class="blog-body">
+      Physics is the language of the universe—and at STEMSphere Academy, we decode it together. 
+      Our <strong>AP Physics tutoring online</strong> doesn't just teach formulas; we build 
+      intuition through hands-on problem-solving and visual demonstrations that make abstract 
+      concepts click. From projectile motion to electromagnetic fields, every lesson connects 
+      theory to the world around you.
+    </p>
+    <p class="blog-body">
+      Students across <strong>New York</strong>, <strong>California</strong>, and <strong>Texas</strong> 
+      choose us for <strong>AP Physics C exam mastery</strong>, while learners in <strong>Hong Kong</strong> 
+      and <strong>Singapore</strong> excel with our <strong>IB Physics HL preparation</strong>. We specialize 
+      in breaking down complex topics—kinematics, thermodynamics, quantum mechanics—into step-by-step strategies 
+      that build confidence and exam-ready skills.
+    </p>
+    <p class="blog-body">
+      Whether you're struggling with circuits, acing mechanics, or preparing for university-level physics, 
+      our tutors adapt to your learning style. We use real-world examples, interactive simulations, and 
+      practice problems that mirror actual AP and IB exams. The result? Students who don't just pass—they thrive.
+    </p>
+    <h3 class="blog-subtitle">Physics tutoring expertise</h3>
+    <ul class="blog-topics">
+      <li>AP Physics 1 and 2 tutoring online</li>
+      <li>AP Physics C (Mechanics & Electricity & Magnetism) prep</li>
+      <li>IB Physics HL and SL exam preparation Singapore</li>
+      <li>A-Level physics tutoring Hong Kong</li>
+      <li>HKDSE Physics exam coaching</li>
+      <li>College physics for engineering students California</li>
+      <li>Mechanics and electromagnetism help Texas</li>
+      <li>University physics tutoring New York</li>
+    </ul>
+  </article>
 </section>
 
 <!-- FAQ & CONTACT SECTION -->
@@ -1638,10 +1685,10 @@ footer {
       <div style="display: flex; align-items: center; gap: 1rem;">
         <!-- Stacked Customer Service Team Avatars -->
         <div style="position: relative; width: 180px; height: 100px;">
-          <img src="https://i.postimg.cc/mrbw5b7S/Tutor1.png" alt="Support Team" style="position: absolute; top: 0; left: 0; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 4;">
-          <img src="https://i.postimg.cc/bvzTBz19/Tutor2.png" alt="Support Team" style="position: absolute; top: 0; left: 40px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 3;">
-          <img src="https://i.postimg.cc/JzgXbMPk/In-Shot-20250221-181740954.jpg" alt="Support Team" style="position: absolute; top: 0; left: 80px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 2;">
-          <img src="https://i.postimg.cc/jjsXFsy6/Tutor3.png" alt="Support Team" style="position: absolute; top: 0; left: 120px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1;">
+          <img src="https://i.postimg.cc/mrbw5b7S/Tutor1.png" alt="Support Team" style="position: absolute; top: 0; left: 0; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 4;" loading="lazy">
+          <img src="https://i.postimg.cc/bvzTBz19/Tutor2.png" alt="Support Team" style="position: absolute; top: 0; left: 40px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 3;" loading="lazy">
+          <img src="https://i.postimg.cc/JzgXbMPk/In-Shot-20250221-181740954.jpg" alt="Support Team" style="position: absolute; top: 0; left: 80px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 2;" loading="lazy">
+          <img src="https://i.postimg.cc/jjsXFsy6/Tutor3.png" alt="Support Team" style="position: absolute; top: 0; left: 120px; width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1;" loading="lazy">
         </div>
         <div style="flex: 1;">
           <h3 style="margin: 0 0 0.5rem 0; font-size: 1.6em; font-weight: 800;">💬 Live Chat with Our Team</h3>
@@ -1673,8 +1720,11 @@ footer {
 </div>
 
 <!-- SUPABASE & CHAT JAVASCRIPT -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// ⚡ PERFORMANCE: All non-critical JS delayed
+window.addEventListener('load', function() {
+  
 // Supabase setup
 const SUPABASE_URL = 'https://horqtcwnhwgodwlyqhli.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvcnF0Y3duaHdnb2R3bHlxaGxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NjAyNzEsImV4cCI6MjA3NTMzNjI3MX0.4rYzW6MFEkVVqLor55RuFGLwE6WBJrYLxvYbgeXXRGU';
@@ -1685,7 +1735,7 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 let currentAdvisorId = null;
 let currentAdvisorData = null;
 
-// Check if advisors are available - RUNS IMMEDIATELY ON PAGE LOAD
+// Check if advisors are available
 async function checkAdvisorAvailability() {
   try {
     const { data: advisors, error } = await supabaseClient
@@ -1706,19 +1756,11 @@ async function checkAdvisorAvailability() {
     
     if (advisors && advisors.length > 0) {
       currentAdvisorData = advisors[0];
-      if (chatWrapper) {
-        chatWrapper.style.display = 'block';
-      }
-      if (statusIndicator) {
-        statusIndicator.style.display = 'block';
-      }
+      if (chatWrapper) chatWrapper.style.display = 'block';
+      if (statusIndicator) statusIndicator.style.display = 'block';
     } else {
-      if (chatWrapper) {
-        chatWrapper.style.display = 'none';
-      }
-      if (statusIndicator) {
-        statusIndicator.style.display = 'none';
-      }
+      if (chatWrapper) chatWrapper.style.display = 'none';
+      if (statusIndicator) statusIndicator.style.display = 'none';
     }
   } catch (err) {
     console.error('Exception in checkAdvisorAvailability:', err);
@@ -1726,7 +1768,7 @@ async function checkAdvisorAvailability() {
 }
 
 // Open anonymous chat modal
-async function openAnonymousAdvisorChat() {
+window.openAnonymousAdvisorChat = async function() {
   const { data: advisors } = await supabaseClient
     .from('profiles')
     .select('id, full_name, profile_photo_url, bio, years_experience, education, fun_fact, teaching_video_url')
@@ -1742,11 +1784,8 @@ async function openAnonymousAdvisorChat() {
 
   currentAdvisorId = advisors[0].id;
   currentAdvisorData = advisors[0];
-  
-  // Show the modal
   document.getElementById('anonymousAdvisorChatModal').style.display = 'flex';
   
-  // Show login prompt in messages area
   const container = document.getElementById('anonymousChatMessages');
   container.innerHTML = `
     <div style="text-align: center; padding: 2rem; color: #999;">
@@ -1756,30 +1795,50 @@ async function openAnonymousAdvisorChat() {
   `;
 }
 
-// Redirect to login page when user tries to send message
-function redirectToLogin() {
+window.redirectToLogin = function() {
   window.location.href = 'https://learn.stemsphere.academy/login.html';
 }
 
-// Close anonymous chat
-function closeAnonymousChat() {
+window.closeAnonymousChat = function() {
   document.getElementById('anonymousAdvisorChatModal').style.display = 'none';
 }
 
-// 🚀 CRITICAL: Run immediately when page loads (not waiting for DOMContentLoaded)
+// Run check immediately
 checkAdvisorAvailability();
-
-// Also check when DOM is ready (backup)
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', checkAdvisorAvailability);
-}
-
-// Check every 5 seconds for fast updates
 setInterval(checkAdvisorAvailability, 5000);
 
 // ==================== COOKIE CONSENT MANAGEMENT ====================
 
-// Toggle switches functionality
+function adjustCookieBannerForMobile() {
+  const isMobile = window.innerWidth <= 768;
+  const banner = document.getElementById('cookieConsentBanner');
+  const fullText = document.getElementById('cookieFullText');
+  const mobileText = document.getElementById('cookieMobileText');
+  const buttons = document.getElementById('cookieButtons');
+  
+  if (isMobile) {
+    banner.style.padding = '0.5rem 0.75rem';
+    fullText.style.display = 'none';
+    mobileText.style.display = 'block';
+    buttons.querySelectorAll('button').forEach(btn => {
+      btn.style.padding = '0.4rem 0.8rem';
+      btn.style.fontSize = '0.75em';
+    });
+  } else {
+    banner.style.padding = '0.75rem';
+    fullText.style.display = 'block';
+    mobileText.style.display = 'none';
+    buttons.querySelectorAll('button').forEach((btn, idx) => {
+      if (idx === 0 || idx === 1) {
+        btn.style.padding = '0.5rem 1.25rem';
+      } else {
+        btn.style.padding = '0.5rem 1rem';
+      }
+      btn.style.fontSize = '0.8em';
+    });
+  }
+}
+
 document.getElementById('analyticsCookies').addEventListener('change', function() {
   const toggle = document.getElementById('analyticsToggle');
   const slider = document.getElementById('analyticsSlider');
@@ -1804,36 +1863,35 @@ document.getElementById('marketingCookies').addEventListener('change', function(
   }
 });
 
-// Initialize toggles
-window.addEventListener('DOMContentLoaded', () => {
-  const analyticsSlider = document.getElementById('analyticsSlider');
-  const marketingSlider = document.getElementById('marketingSlider');
-  if (analyticsSlider) analyticsSlider.style.transform = 'translateX(30px)';
-  if (marketingSlider) marketingSlider.style.transform = 'translateX(30px)';
-});
+const analyticsSlider = document.getElementById('analyticsSlider');
+const marketingSlider = document.getElementById('marketingSlider');
+if (analyticsSlider) analyticsSlider.style.transform = 'translateX(30px)';
+if (marketingSlider) marketingSlider.style.transform = 'translateX(30px)';
 
-// Check if user has already made a choice
 function checkCookieConsent() {
   const consent = localStorage.getItem('cookieConsent');
   if (!consent) {
-    // Show banner after 1 second delay for better UX
+    const isMobile = window.innerWidth <= 768;
+    const delay = isMobile ? 10000 : 1000;
     setTimeout(() => {
+      adjustCookieBannerForMobile();
       document.getElementById('cookieConsentBanner').style.display = 'block';
-    }, 1000);
+    }, delay);
   } else {
-    // User has already consented, load tracking scripts
     const consentData = JSON.parse(consent);
-    if (consentData.analytics) {
-      enableAnalytics();
-    }
-    if (consentData.marketing) {
-      enableMarketing();
-    }
+    if (consentData.analytics) enableAnalytics();
+    if (consentData.marketing) enableMarketing();
   }
 }
 
-// Accept all cookies
-function acceptAllCookies() {
+window.addEventListener('resize', () => {
+  const banner = document.getElementById('cookieConsentBanner');
+  if (banner.style.display === 'block') {
+    adjustCookieBannerForMobile();
+  }
+});
+
+window.acceptAllCookies = function() {
   const consent = {
     essential: true,
     analytics: true,
@@ -1842,16 +1900,12 @@ function acceptAllCookies() {
   };
   localStorage.setItem('cookieConsent', JSON.stringify(consent));
   document.getElementById('cookieConsentBanner').style.display = 'none';
-  
-  // Enable all tracking
   enableAnalytics();
   enableMarketing();
-  
   console.log('✅ All cookies accepted');
 }
 
-// Reject all optional cookies
-function rejectCookies() {
+window.rejectCookies = function() {
   const consent = {
     essential: true,
     analytics: false,
@@ -1860,28 +1914,23 @@ function rejectCookies() {
   };
   localStorage.setItem('cookieConsent', JSON.stringify(consent));
   document.getElementById('cookieConsentBanner').style.display = 'none';
-  
-  console.log('❌ Optional cookies rejected (visitor tracking still active)');
+  console.log('❌ Optional cookies rejected');
 }
 
-// Open cookie settings modal
-function openCookieSettings() {
+window.openCookieSettings = function() {
   document.getElementById('cookieConsentBanner').style.display = 'none';
   document.getElementById('cookieSettingsModal').style.display = 'flex';
 }
 
-// Close cookie settings modal
-function closeCookieSettings() {
+window.closeCookieSettings = function() {
   document.getElementById('cookieSettingsModal').style.display = 'none';
-  
-  // Show banner again if no consent saved
   if (!localStorage.getItem('cookieConsent')) {
+    adjustCookieBannerForMobile();
     document.getElementById('cookieConsentBanner').style.display = 'block';
   }
 }
 
-// Save custom cookie settings
-function saveCustomCookieSettings() {
+window.saveCustomCookieSettings = function() {
   const analytics = document.getElementById('analyticsCookies').checked;
   const marketing = document.getElementById('marketingCookies').checked;
   
@@ -1895,19 +1944,16 @@ function saveCustomCookieSettings() {
   localStorage.setItem('cookieConsent', JSON.stringify(consent));
   document.getElementById('cookieSettingsModal').style.display = 'none';
   
-  // Enable selected tracking
   if (analytics) enableAnalytics();
   if (marketing) enableMarketing();
   
   console.log('✅ Custom cookie preferences saved:', consent);
 }
 
-// Accept all from settings modal
-function acceptAllFromSettings() {
+window.acceptAllFromSettings = function() {
   document.getElementById('analyticsCookies').checked = true;
   document.getElementById('marketingCookies').checked = true;
   
-  // Update toggle UI
   document.getElementById('analyticsToggle').style.background = '#667eea';
   document.getElementById('analyticsSlider').style.transform = 'translateX(30px)';
   document.getElementById('marketingToggle').style.background = '#667eea';
@@ -1916,85 +1962,74 @@ function acceptAllFromSettings() {
   saveCustomCookieSettings();
 }
 
-// Enable Google Analytics (already in your site)
 function enableAnalytics() {
-  // Your Google Analytics is already loaded in the <head>
-  // This just confirms it's allowed to track
   console.log('📊 Analytics tracking enabled');
 }
 
-// Enable Marketing pixels (Facebook Pixel already in your site)
 function enableMarketing() {
-  // Your Facebook Pixel is already loaded in the <head>
-  // This just confirms it's allowed to track
   console.log('🎯 Marketing tracking enabled');
 }
 
-// ==================== LIVE VISITOR TRACKING (ALWAYS RUNS) ====================
-(async function() {
-  // Generate or get visitor ID
-  let visitorId = localStorage.getItem('visitor_id');
-  if (!visitorId) {
-    visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    localStorage.setItem('visitor_id', visitorId);
-  }
-
-  async function trackVisitor() {
-    try {
-      // Get location data
-      let locationData = { country: 'Unknown', city: 'Unknown', ip: 'Unknown' };
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (response.ok) {
-          locationData = await response.json();
-        }
-      } catch (e) {
-        console.log('Location lookup failed (non-critical)');
-      }
-
-      const visitorData = {
-        visitor_id: visitorId,
-        page_url: window.location.href,
-        ip_address: locationData.ip || 'Unknown',
-        city: locationData.city || null,
-        country: locationData.country_name || locationData.country || null,
-        last_seen: new Date().toISOString()
-      };
-
-      // Upsert visitor data
-      const { error } = await supabaseClient
-        .from('live_visitors')
-        .upsert(visitorData, { 
-          onConflict: 'visitor_id',
-          ignoreDuplicates: false 
-        });
-
-      if (error) {
-        console.error('Visitor tracking error:', error);
-      }
-    } catch (err) {
-      console.error('Tracking failed:', err);
+// ==================== LIVE VISITOR TRACKING (DELAYED 30 SECONDS) ====================
+setTimeout(function() {
+  (async function() {
+    let visitorId = localStorage.getItem('visitor_id');
+    if (!visitorId) {
+      visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('visitor_id', visitorId);
     }
-  }
 
-  // Track immediately
-  await trackVisitor();
+    async function trackVisitor() {
+      try {
+        let locationData = { country: 'Unknown', city: 'Unknown', ip: 'Unknown' };
+        try {
+          const response = await fetch('https://ipapi.co/json/');
+          if (response.ok) {
+            locationData = await response.json();
+          }
+        } catch (e) {
+          console.log('Location lookup failed (non-critical)');
+        }
 
-  // Update every 30 seconds
-  setInterval(trackVisitor, 30000);
+        const visitorData = {
+          visitor_id: visitorId,
+          page_url: window.location.href,
+          ip_address: locationData.ip || 'Unknown',
+          city: locationData.city || null,
+          country: locationData.country_name || locationData.country || null,
+          last_seen: new Date().toISOString()
+        };
 
-  // Cleanup on page leave
-  window.addEventListener('beforeunload', () => {
-    navigator.sendBeacon(
-      `${SUPABASE_URL}/rest/v1/live_visitors?visitor_id=eq.${visitorId}`,
-      JSON.stringify({ last_seen: new Date().toISOString() })
-    );
-  });
-})();
+        const { error } = await supabaseClient
+          .from('live_visitors')
+          .upsert(visitorData, { 
+            onConflict: 'visitor_id',
+            ignoreDuplicates: false 
+          });
 
-// Run cookie consent check on page load
+        if (error) {
+          console.error('Visitor tracking error:', error);
+        }
+      } catch (err) {
+        console.error('Tracking failed:', err);
+      }
+    }
+
+    await trackVisitor();
+    setInterval(trackVisitor, 30000);
+
+    window.addEventListener('beforeunload', () => {
+      navigator.sendBeacon(
+        `${SUPABASE_URL}/rest/v1/live_visitors?visitor_id=eq.${visitorId}`,
+        JSON.stringify({ last_seen: new Date().toISOString() })
+      );
+    });
+  })();
+}, 30000); // ⚡ DELAYED 30 SECONDS
+
 checkCookieConsent();
 
+}); // End of window.load
 </script>
 
 </body>
