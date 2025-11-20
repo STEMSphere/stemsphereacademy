@@ -553,101 +553,297 @@ h2.subtitle {
 }
 
 #pricing-section .content-wrapper {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255,215,0,0.3);
-  border-radius: 20px;
-  padding: 3rem 2rem;
 }
 
 #pricing-section h2 {
   font-size: clamp(2rem, 5vw, 3rem);
   text-align: center;
   margin-bottom: 2rem;
-  background: linear-gradient(135deg, #FFD700, #FFA500);
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-#pricing-section p {
+.pricing-intro {
   text-align: center;
-  max-width: 800px;
-  margin: 1rem auto;
+  max-width: 900px;
+  margin: 0 auto 3rem;
   line-height: 1.8;
   color: rgba(255,255,255,0.9);
-  font-size: 1.05rem;
-}
-
-#pricing-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 2rem auto;
-  max-width: 700px;
-}
-
-#pricing-section ul li {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  position: relative;
-  transition: all 0.3s;
   font-size: 1.1rem;
 }
 
-#pricing-section ul li:hover {
-  transform: translateX(10px);
-  border-color: #FFD700;
-  box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+/* Annual Banner */
+.annual-banner {
+  background: linear-gradient(135deg, #FFD700, #FFC700);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(255,215,0,0.3);
 }
 
-#pricing-section ul li.most-popular {
+.annual-banner h3 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.limited-time-badge {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(255,107,53,0.4);
+}
+
+.limited-time-badge p {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.annual-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto 2rem;
+}
+
+.annual-plan-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 3px solid #ff6b35;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.annual-plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.annual-plan-card h4 {
+  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.annual-plan-card .price {
+  font-size: 3rem;
+  color: #ff6b35;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.annual-plan-card .details {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.annual-plan-card .savings {
+  background: rgba(0,200,83,0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.annual-plan-card .savings p {
+  color: #00c853;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.annual-plan-card .weekly-cost {
+  color: #007bff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.annual-disclaimer {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.annual-cta-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #00c853, #00e676);
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 8px 20px rgba(0,200,83,0.4);
+  transition: all 0.3s;
+}
+
+.annual-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,200,83,0.6);
+}
+
+/* Regular Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.pricing-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  transition: all 0.3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: #00c6ff;
+  box-shadow: 0 20px 50px rgba(0,198,255,0.4);
+}
+
+.pricing-card.most-popular {
   border: 3px solid #FFD700;
-  background: rgba(255,215,0,0.1);
-  box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+  background: rgba(255,215,0,0.08);
+  box-shadow: 0 15px 40px rgba(255,215,0,0.3);
 }
 
-#pricing-section ul li.most-popular .badge {
+.most-popular-badge {
   position: absolute;
   top: -15px;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   background: linear-gradient(135deg, #FFD700, #FFA500);
   color: #000;
   font-weight: 800;
   font-size: 0.85em;
-  padding: 5px 15px;
+  padding: 0.5rem 1.5rem;
   border-radius: 50px;
   text-transform: uppercase;
   box-shadow: 0 4px 12px rgba(255,215,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-#pricing-section .highlight {
+.pricing-card h3 {
+  color: #00c6ff;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pricing-card.most-popular h3 {
   color: #FFD700;
+}
+
+.pricing-card .price {
+  font-size: 3.5rem;
+  color: #FFD700;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.pricing-card .session-details {
+  text-align: center;
+  color: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  flex-grow: 1;
+}
+
+.pricing-card ul li {
+  position: relative;
+  padding-left: 2rem;
+  margin: 1rem 0;
+  color: rgba(255,255,255,0.9);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.pricing-card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ff88;
+  font-size: 1.3em;
   font-weight: 700;
 }
 
-#pricing-section .conversion-box {
-  margin: 3rem auto 0;
-  padding: 2rem;
-  background: rgba(0,0,0,0.3);
-  border-radius: 12px;
-  max-width: 600px;
-}
-
-#oanda_ecc {
-  width: 100%;
-}
-
-#oanda_ecc span {
-  color: #fff;
-  font-size: 0.9em;
+.pricing-cta-btn {
   display: block;
-  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  transition: all 0.3s;
+  box-shadow: 0 8px 20px rgba(0,198,255,0.4);
+}
+
+.pricing-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,198,255,0.6);
+}
+
+.pricing-card.most-popular .pricing-cta-btn {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+  box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+}
+
+.pricing-card.most-popular .pricing-cta-btn:hover {
+  box-shadow: 0 12px 30px rgba(255,215,0,0.6);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -935,10 +1131,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  #pricing-section .content-wrapper {
-    padding: 2rem 1rem;
-  }
-
   .blog-post {
     padding: 1.5rem;
   }
@@ -947,6 +1139,14 @@ footer {
     top: 60px;
     font-size: 0.85em;
     padding: 8px 15px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .annual-plans-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1105,30 +1305,178 @@ footer {
 </div>
 
 <!-- START: COMPACT LANGUAGE TRANSLATOR BAR -->
+<!-- START: LANGUAGE TRANSLATOR (ALL 130+ LANGUAGES) -->
 <div id="fallback-translator">
   <select onchange="translatePage(this.value)">
     <option value="en" selected>🌐 English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-    <option value="zh-CN">简体中文</option>
-    <option value="zh-TW">繁體中文</option>
-    <option value="ja">日本語</option>
-    <option value="ko">한국어</option>
-    <option value="ar">العربية</option>
-    <option value="hi">हिन्दी</option>
-    <option value="pt">Português</option>
-    <option value="ru">Русский</option>
-    <option value="it">Italiano</option>
-    <option value="nl">Nederlands</option>
-    <option value="pl">Polski</option>
-    <option value="tr">Türkçe</option>
-    <option value="vi">Tiếng Việt</option>
-    <option value="th">ไทย</option>
-    <option value="id">Bahasa Indonesia</option>
-    <option value="ms">Bahasa Melayu</option>
+    
+    <optgroup label="─── Popular Languages ───">
+      <option value="es">Español (Spanish)</option>
+      <option value="fr">Français (French)</option>
+      <option value="de">Deutsch (German)</option>
+      <option value="zh-CN">简体中文 (Chinese Simplified)</option>
+      <option value="zh-TW">繁體中文 (Chinese Traditional)</option>
+      <option value="ja">日本語 (Japanese)</option>
+      <option value="ko">한국어 (Korean)</option>
+      <option value="ar">العربية (Arabic)</option>
+      <option value="hi">हिन्दी (Hindi)</option>
+      <option value="pt">Português (Portuguese)</option>
+      <option value="ru">Русский (Russian)</option>
+      <option value="it">Italiano (Italian)</option>
+    </optgroup>
+    
+    <optgroup label="─── A-C ───">
+      <option value="af">Afrikaans</option>
+      <option value="sq">Albanian (Shqip)</option>
+      <option value="am">Amharic (አማርኛ)</option>
+      <option value="ar">Arabic (العربية)</option>
+      <option value="hy">Armenian (Հայերեն)</option>
+      <option value="as">Assamese (অসমীয়া)</option>
+      <option value="ay">Aymara</option>
+      <option value="az">Azerbaijani (Azərbaycan)</option>
+      <option value="bm">Bambara</option>
+      <option value="eu">Basque (Euskara)</option>
+      <option value="be">Belarusian (Беларуская)</option>
+      <option value="bn">Bengali (বাংলা)</option>
+      <option value="bho">Bhojpuri (भोजपुरी)</option>
+      <option value="bs">Bosnian (Bosanski)</option>
+      <option value="bg">Bulgarian (Български)</option>
+      <option value="ca">Catalan (Català)</option>
+      <option value="ceb">Cebuano</option>
+      <option value="ny">Chichewa (Nyanja)</option>
+      <option value="zh-CN">Chinese Simplified (简体中文)</option>
+      <option value="zh-TW">Chinese Traditional (繁體中文)</option>
+      <option value="co">Corsican (Corsu)</option>
+      <option value="hr">Croatian (Hrvatski)</option>
+      <option value="cs">Czech (Čeština)</option>
+    </optgroup>
+    
+    <optgroup label="─── D-G ───">
+      <option value="da">Danish (Dansk)</option>
+      <option value="dv">Dhivehi (ދިވެހި)</option>
+      <option value="doi">Dogri (डोगरी)</option>
+      <option value="nl">Dutch (Nederlands)</option>
+      <option value="eo">Esperanto</option>
+      <option value="et">Estonian (Eesti)</option>
+      <option value="ee">Ewe</option>
+      <option value="tl">Filipino (Tagalog)</option>
+      <option value="fi">Finnish (Suomi)</option>
+      <option value="fr">French (Français)</option>
+      <option value="fy">Frisian (Frysk)</option>
+      <option value="gl">Galician (Galego)</option>
+      <option value="ka">Georgian (ქართული)</option>
+      <option value="de">German (Deutsch)</option>
+      <option value="el">Greek (Ελληνικά)</option>
+      <option value="gn">Guarani</option>
+      <option value="gu">Gujarati (ગુજરાતી)</option>
+    </optgroup>
+    
+    <optgroup label="─── H-K ───">
+      <option value="ht">Haitian Creole (Kreyòl)</option>
+      <option value="ha">Hausa</option>
+      <option value="haw">Hawaiian (ʻŌlelo Hawaiʻi)</option>
+      <option value="iw">Hebrew (עברית)</option>
+      <option value="hi">Hindi (हिन्दी)</option>
+      <option value="hmn">Hmong</option>
+      <option value="hu">Hungarian (Magyar)</option>
+      <option value="is">Icelandic (Íslenska)</option>
+      <option value="ig">Igbo</option>
+      <option value="ilo">Ilocano</option>
+      <option value="id">Indonesian (Bahasa Indonesia)</option>
+      <option value="ga">Irish (Gaeilge)</option>
+      <option value="it">Italian (Italiano)</option>
+      <option value="ja">Japanese (日本語)</option>
+      <option value="jw">Javanese (Basa Jawa)</option>
+      <option value="kn">Kannada (ಕನ್ನಡ)</option>
+      <option value="kk">Kazakh (Қазақ)</option>
+      <option value="km">Khmer (ភាសាខ្មែរ)</option>
+      <option value="rw">Kinyarwanda</option>
+      <option value="gom">Konkani (कोंकणी)</option>
+      <option value="ko">Korean (한국어)</option>
+      <option value="kri">Krio</option>
+      <option value="ku">Kurdish (Kurdî)</option>
+      <option value="ckb">Kurdish (Sorani) (کوردی)</option>
+      <option value="ky">Kyrgyz (Кыргызча)</option>
+    </optgroup>
+    
+    <optgroup label="─── L-O ───">
+      <option value="lo">Lao (ລາວ)</option>
+      <option value="la">Latin (Latina)</option>
+      <option value="lv">Latvian (Latviešu)</option>
+      <option value="ln">Lingala</option>
+      <option value="lt">Lithuanian (Lietuvių)</option>
+      <option value="lg">Luganda</option>
+      <option value="lb">Luxembourgish (Lëtzebuergesch)</option>
+      <option value="mk">Macedonian (Македонски)</option>
+      <option value="mai">Maithili (मैथिली)</option>
+      <option value="mg">Malagasy</option>
+      <option value="ms">Malay (Bahasa Melayu)</option>
+      <option value="ml">Malayalam (മലയാളം)</option>
+      <option value="mt">Maltese (Malti)</option>
+      <option value="mi">Maori (Te Reo Māori)</option>
+      <option value="mr">Marathi (मराठी)</option>
+      <option value="mni-Mtei">Meiteilon (Manipuri)</option>
+      <option value="lus">Mizo</option>
+      <option value="mn">Mongolian (Монгол)</option>
+      <option value="my">Myanmar (Burmese) (မြန်မာ)</option>
+      <option value="ne">Nepali (नेपाली)</option>
+      <option value="no">Norwegian (Norsk)</option>
+      <option value="or">Odia (Oriya) (ଓଡ଼ିଆ)</option>
+      <option value="om">Oromo</option>
+    </optgroup>
+    
+    <optgroup label="─── P-S ───">
+      <option value="ps">Pashto (پښتو)</option>
+      <option value="fa">Persian (Farsi) (فارسی)</option>
+      <option value="pl">Polish (Polski)</option>
+      <option value="pt">Portuguese (Português)</option>
+      <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+      <option value="qu">Quechua</option>
+      <option value="ro">Romanian (Română)</option>
+      <option value="ru">Russian (Русский)</option>
+      <option value="sm">Samoan</option>
+      <option value="sa">Sanskrit (संस्कृतम्)</option>
+      <option value="gd">Scots Gaelic (Gàidhlig)</option>
+      <option value="nso">Sepedi</option>
+      <option value="sr">Serbian (Српски)</option>
+      <option value="st">Sesotho</option>
+      <option value="sn">Shona</option>
+      <option value="sd">Sindhi (سنڌي)</option>
+      <option value="si">Sinhala (සිංහල)</option>
+      <option value="sk">Slovak (Slovenčina)</option>
+      <option value="sl">Slovenian (Slovenščina)</option>
+      <option value="so">Somali (Soomaali)</option>
+      <option value="es">Spanish (Español)</option>
+      <option value="su">Sundanese (Basa Sunda)</option>
+      <option value="sw">Swahili (Kiswahili)</option>
+      <option value="sv">Swedish (Svenska)</option>
+    </optgroup>
+    
+    <optgroup label="─── T-Z ───">
+      <option value="tg">Tajik (Тоҷикӣ)</option>
+      <option value="ta">Tamil (தமிழ்)</option>
+      <option value="tt">Tatar (Татар)</option>
+      <option value="te">Telugu (తెలుగు)</option>
+      <option value="th">Thai (ไทย)</option>
+      <option value="ti">Tigrinya (ትግርኛ)</option>
+      <option value="ts">Tsonga</option>
+      <option value="tr">Turkish (Türkçe)</option>
+      <option value="tk">Turkmen (Türkmen)</option>
+      <option value="ak">Twi (Akan)</option>
+      <option value="uk">Ukrainian (Українська)</option>
+      <option value="ur">Urdu (اردو)</option>
+      <option value="ug">Uyghur (ئۇيغۇر)</option>
+      <option value="uz">Uzbek (Oʻzbek)</option>
+      <option value="vi">Vietnamese (Tiếng Việt)</option>
+      <option value="cy">Welsh (Cymraeg)</option>
+      <option value="xh">Xhosa (isiXhosa)</option>
+      <option value="yi">Yiddish (ייִדיש)</option>
+      <option value="yo">Yoruba (Èdè Yorùbá)</option>
+      <option value="zu">Zulu (isiZulu)</option>
+    </optgroup>
   </select>
 </div>
+<!-- END: LANGUAGE TRANSLATOR -->
 
 <script>
   function translatePage(lang) {
@@ -1458,45 +1806,131 @@ footer {
 <!-- PRICING SECTION -->
 <section id="pricing-section">
   <div class="content-wrapper">
-    <h2>What Are Our Costs?</h2>
-
-    <p>
-      We offer flexible memberships designed to fit your learning style.  
-      Each plan includes <span class="highlight">16 sessions over 8 weeks</span>, with classes held <span class="highlight">twice a week per subject</span>.  
-      Students often stack multiple subjects to build a schedule that fits their goals and pace.
+    
+    <h2>Choose Your Learning Path</h2>
+    <p class="pricing-intro">
+      We offer flexible memberships designed to fit your learning goals and schedule. Whether you prefer intensive twice-weekly sessions or a more relaxed once-weekly pace, we have the perfect plan for you. Students often stack multiple subjects to build a customized schedule that matches their academic needs.
     </p>
 
-    <ul>
-      <li><span class="highlight">1-on-1 Private Tutoring</span> — $2000 USD per plan</li>
-      <li class="most-popular">
-        <div class="badge">Most Popular</div>
-        <span class="highlight">Small Group (up to 4 students)</span> — $799 USD per plan
-      </li>
-    </ul>
-
-    <h3 style="color: #00c6ff; text-align: center; font-size: clamp(1.5rem, 4vw, 2rem); margin-top: 2rem; margin-bottom: 0.5rem;">
-      Need a smaller flex schedule?
-    </h3>
-    <p style="text-align: center; margin-bottom: 1rem;">
-      For those needing less than 2 classes weekly and preferring a once-weekly pace, we offer a flexible 8-session plan.
-    </p>
-    <ul>
-      <li>
-        <span class="highlight">Flex 1-on-1 Private Tutoring (8 Sessions)</span> — $1100 USD per plan
-      </li>
-    </ul>
-
-    <p>
-      We accept payments in <span class="highlight">most global currencies</span>, including USD, EUR, GBP, NGN, INR, CAD, AUD, JPY, HKD, SGD, PHP, KRW, MYR, THB, TWD, ZAR, BRL, MXN, and more.  
-      Use the converter below to estimate your local cost.
-    </p>
-
-    <div class="conversion-box">
-      <div id="oanda_ecc">
-        <span>Currency Converter by OANDA</span>
-        <script defer src="https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en"></script>
+    <!-- REGULAR PRICING: 3 TIERS (FIRST) -->
+    <div class="pricing-grid">
+      
+      <!-- 1-on-1 Private Tutoring -->
+      <div class="pricing-card">
+        <h3>1-on-1 Private Tutoring</h3>
+        <div class="price">$2,000</div>
+        <p class="session-details">
+          16 sessions over 8 weeks<br>
+          (Twice weekly)
+        </p>
+        <ul>
+          <li>Personalized 1-on-1 attention</li>
+          <li>Custom learning pace</li>
+          <li>Flexible scheduling priority</li>
+          <li>Direct instructor access</li>
+          <li>Weekly progress reports</li>
+        </ul>
+        <a href="https://learn.stemsphere.academy/login.html" class="pricing-cta-btn">
+          Book Free Demo →
+        </a>
       </div>
+
+      <!-- Small Group (MOST POPULAR) -->
+      <div class="pricing-card most-popular">
+        <div class="most-popular-badge">
+          <span>👑</span>
+          <span>MOST POPULAR</span>
+        </div>
+        <h3>Small Group (up to 4)</h3>
+        <div class="price">$799</div>
+        <p class="session-details">
+          16 sessions over 8 weeks<br>
+          (Twice weekly)
+        </p>
+        <ul>
+          <li>Maximum 4 students per class</li>
+          <li>Peer learning environment</li>
+          <li>Collaborative problem-solving</li>
+          <li>Personalized attention</li>
+          <li>Best value for results</li>
+        </ul>
+        <a href="https://learn.stemsphere.academy/login.html" class="pricing-cta-btn">
+          Book Free Demo →
+        </a>
+      </div>
+
+      <!-- Flex 1-on-1 (8 Sessions) -->
+      <div class="pricing-card">
+        <h3>Flex 1-on-1 (8 Sessions)</h3>
+        <div class="price">$1,100</div>
+        <p class="session-details">
+          8 sessions over 8 weeks<br>
+          (Once weekly)
+        </p>
+        <ul>
+          <li>Perfect for lighter schedules</li>
+          <li>Full 1-on-1 attention</li>
+          <li>Once-weekly pace</li>
+          <li>Flexible scheduling</li>
+          <li>Ideal for test prep review</li>
+        </ul>
+        <a href="https://learn.stemsphere.academy/login.html" class="pricing-cta-btn">
+          Book Free Demo →
+        </a>
+      </div>
+
     </div>
+
+    <!-- 💰 ANNUAL MEMBERSHIP BANNER (BELOW THE 3 PLANS) -->
+    <div class="annual-banner" style="margin-top: 5rem;">
+      <h3>
+        <span>💰</span>
+        <span>Save Big with Annual Memberships!</span>
+      </h3>
+      
+
+      <!-- Annual Plans Grid -->
+      <div class="annual-plans-grid">
+        
+        <!-- Standard 1-on-1 Annual -->
+        <div class="annual-plan-card">
+          <h4>Standard 1-on-1 Annual</h4>
+          <div class="price">$7,200</div>
+          <p class="details">96 classes (1 full year, twice weekly)</p>
+          <div class="savings">
+            <p>
+              <span>💰</span>
+              <span>Save $4,800!</span>
+            </p>
+          </div>
+          <p class="weekly-cost">That's only $138/week</p>
+        </div>
+
+        <!-- Flex 1-on-1 Annual -->
+        <div class="annual-plan-card">
+          <h4>Flex 1-on-1 Annual</h4>
+          <div class="price">$3,960</div>
+          <p class="details">48 classes (1 full year, once weekly)</p>
+          <div class="savings">
+            <p>
+              <span>💰</span>
+              <span>Save $2,640!</span>
+            </p>
+          </div>
+          <p class="weekly-cost">That's only $76/week</p>
+        </div>
+        
+      </div>
+
+      <p class="annual-disclaimer">
+        *First-time enrollments only. Ask your advisor if this promotion is available for you.
+      </p>
+
+      <a href="https://learn.stemsphere.academy/login.html" class="annual-cta-btn">
+        📝 Book Free Session to Discuss Annual Plans
+      </a>
+    </div>
+
   </div>
 </section>
 <!-- ============================================================
@@ -1517,6 +1951,7 @@ footer {
 <!-- ============================================================
      END: KIDS REDIRECT BANNER
      ============================================================ -->
+
 <!-- EBOOK RESOURCES SECTION -->
 <section id="ebook-resources">
   <h2>📚 Free Learning Resources</h2>
